@@ -63,7 +63,6 @@ data_clean <- function(i){
 }
 
 plot_ridges <- function(i){
-     
      data <- DataAll |> 
           filter(country == country_names[i])
      
@@ -97,8 +96,10 @@ plot_ridges <- function(i){
                 axis.title = element_text(color = 'black', face = 'plain'),
                 legend.box = 'horizontal',
                 plot.title.position = 'plot',
+                plot.background = element_blank(),
                 legend.position = if_else(i == 7, 'bottom', 'none'))+
-          guides(fill = guide_colorbar(barwidth = 30))
+          guides(fill = guide_colorbar(barwidth = 30,
+                                       vjust = 0))
      fig
 }
 
@@ -140,9 +141,7 @@ fig_1 <- ggplot(data = DataMap) +
      labs(title = "G", x = NULL, y = NULL, fill = '')+
      guides(fill = guide_legend(nrow = 2))
 
-
 # line --------------------------------------------------------------------
-
 
 fill_color <- paletteer_d("ggsci::nrc_npg")
 
@@ -175,7 +174,7 @@ fig_2 <- ggplot(data = DataYear) +
           color = NULL,
           x = "Year",
           y = "Median age")+
-     guides(color = guide_legend(nrow = 2))
+     guides(color = guide_legend(nrow = 1))
 
 # save --------------------------------------------------------------------
 
