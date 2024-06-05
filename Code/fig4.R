@@ -1,210 +1,203 @@
 
+# This script generates Figure 4 in the manuscript.
 
-# drop
+# packages ----------------------------------------------------------------
 
 library(tidyverse)
 library(lubridate)
-library(ggsci)
 library(patchwork)
-library(forecast)
-library(tseries)
 library(openxlsx)
-library(ggh4x)
-library(bsts)
+library(ggridges)
+library(paletteer)
+library(grid)
+library(gtable)
+library(sf)
 
-# data --------------------------------------------------------------------
+fill_color <- c("#E76254FF", "#EF8A47FF", "#F7AA58FF", "#FFD06FFF", "#FFE6B7FF", "#AADCE0FF", "#72BCD5FF", "#528FADFF", "#376795FF", "#1E466EFF")
+
+country_names <- c('US', 'GB', 'SE', 'CN', 'JP',
+                   'SG', 'AU', 'NZ')
+
+# figure --------------------------------------------------------------------
+
+i <- 4
+
+data_clean <- function(i){
+     data <- read.xlsx('./Data/Pertussis case year age.xlsx',
+                       sheet = country_names[i], detectDates = T)
+     names(data)[1] <- 'Year'
+     data[is.na(data)] <- 0
+     data <- data |> 
+          pivot_longer(cols = -Year, names_to = 'Age', values_to = 'Incidence') |> 
+          mutate(StartAge = case_when(
+               grepl("-", Age) ~ as.numeric(sub("-.*", "", Age)),
+               grepl("\\+", Age) ~ as.numeric(sub("\\+.*", "", Age)),
+               TRUE ~ NA_real_),
+               EndAge = case_when(
+                    grepl("-", Age) ~ as.numeric(sub(".*-", "", Age)),
+                    grepl("\\+", Age) ~ 100,
+                    TRUE ~ NA_real_)) |> 
+          rowwise() |> 
+          mutate(AgeList = if (is.na(StartAge)) list(NA_real_) else list(seq(StartAge, EndAge))) |> 
+          unnest(AgeList) |> 
+          filter(!is.na(AgeList)) |> 
+          group_by(Year, AgeList) |> 
+          mutate(AverageIncidence = Incidence / (EndAge - StartAge + 1)) |> 
+          ungroup() %>%
+          select(Year, Age = AgeList, AverageIncidence) |> 
+          group_by(Year) |>
+          mutate(Weight = AverageIncidence/sum(AverageIncidence),
+                 Weight = case_when(
+                      is.na(Weight) ~ 0,
+                      TRUE ~ Weight
+                 )) |> 
+          group_by(Year) |> 
+          do({
+               dens <- density(.$Age, weights = .$Weight, adjust = 0.5, from = 0)
+               data.frame(Age = dens$x, Density = dens$y, Year = unique(.$Year))
+          })  |> 
+          ungroup() |> 
+          mutate(country = country_names[i])
+     
+     return(data)
+}
+
+plot_ridges <- function(i){
+     
+     data <- DataAll |> 
+          filter(country == country_names[i])
+     
+     fig <- ggplot(data) +
+          geom_density_ridges_gradient(mapping = aes(x = Age,
+                                                     y = Year,
+                                                     group = Year,
+                                                     fill = Age,
+                                                     height = Density),
+                                       scale = 1.2,
+                                       stat = "identity",
+                                       rel_min_height = 0.01) +
+          scale_x_continuous(limits = c(0, 100),
+                             expand = c(0, 0),
+                             breaks = seq(0, 100, 10)) +
+          scale_y_continuous(breaks = seq(2015, 2023, 2),
+                             limits = c(2015, NA),
+                             expand = expansion(mult = c(0, 0.04)))+
+          scale_fill_gradientn(colours = fill_color[c(1:4, 7:10)],
+                               breaks = seq(0, 100, 10),
+                               limits = c(0, 100))+
+          labs(title = paste(LETTERS[ifelse(i>5, i+2, i)], country_names[i], sep = ": "),
+               x = 'Age',
+               y = 'Year',
+               fill = "Age") +
+          theme_bw()+
+          theme(panel.grid.major.x = element_blank(),
+                panel.grid.minor.x = element_blank(),
+                axis.text.y = element_text(color = 'black', face = 'plain'),
+                axis.text.x = element_text(color = 'black', face = 'plain', hjust = 0.5),
+                axis.title = element_text(color = 'black', face = 'plain'),
+                legend.box = 'horizontal',
+                plot.title.position = 'plot',
+                legend.position = if_else(i == 7, 'bottom', 'none'))+
+          guides(fill = guide_colorbar(barwidth = 30))
+     fig
+}
+
+DataAll <- bind_rows(map(1:length(country_names), data_clean))
+
+fig_min <- map(1:length(country_names), plot_ridges)
+
+# map ---------------------------------------------------------------------
+
+data <- DataAll |>
+     group_by(country) |>
+     arrange(Age) |>
+     mutate(cum_weight = cumsum(Density)) |>
+     summarise(MedianAge = Age[min(which(cum_weight >= sum(Density) / 2))],
+               .groups = 'drop')
+
+DataMap <- st_read("./Data/world.zh.json") |> 
+     filter(iso_a3  != "ATA") |> 
+     left_join(data, by = c("iso_a2" = "country"))
+
+fig_1 <- ggplot(data = DataMap) +
+     geom_sf(aes(fill = MedianAge)) +
+     # add x, y tick labels
+     theme(axis.text.x = element_text(size = 8),
+           axis.text.y = element_text(size = 8)) +
+     scale_x_continuous(limits = c(-180, 180),
+                        expand = c(0, 0)) + 
+     scale_y_continuous(limits = c(-60, 75)) +
+     scale_fill_gradientn(colours = fill_color[c(1:4, 7:10)],
+                          na.value = 'grey',
+                          limits = c(0, 100))+
+     theme_bw() +
+     theme(panel.grid = element_blank(),
+           plot.title.position = 'plot',
+           panel.background = element_rect(fill = "#C1CDCD", color = NA),
+           axis.text = element_text(color = 'black', face = 'plain'),
+           axis.title = element_text(color = 'black', face = 'plain'),
+           legend.position = 'none') +
+     labs(title = "G", x = NULL, y = NULL, fill = '')+
+     guides(fill = guide_legend(nrow = 2))
+
+
+# line --------------------------------------------------------------------
+
 
 fill_color <- paletteer_d("ggsci::nrc_npg")
 
-# Load data
-df_clean <- read.csv('./Outcome/Table S1.csv') |> 
-     group_by(Country) |>
-     mutate(Date = as.Date(Date),
-            AnnualizedInci = case_when(all(is.na(Month)) ~ Incidence * 52.14,
-                                       all(!is.na(Month)) ~ Incidence * 12))
+DataYear <- DataAll |> 
+     group_by(country, Year) |>
+     arrange(Age) |>
+     mutate(cum_weight = cumsum(Density)) |>
+     summarise(MedianAge = Age[min(which(cum_weight >= sum(Density) / 2))],
+               .groups = 'drop')
 
-# Function to calculate MAPE
-smape <- function(actual, forecast) {
-     n <- length(actual)
-     sum_val <- sum(2 * abs(forecast - actual) / (abs(actual) + abs(forecast)))
-     smape_val <- (1 / n) * sum_val * 100
-     return(smape_val)
-}
+fig_2 <- ggplot(data = DataYear) +
+     geom_point(aes(x = Year, y = MedianAge, color = country)) +
+     geom_line(aes(x = Year, y = MedianAge, color = country)) +
+     scale_color_manual(values = fill_color) +
+     scale_y_continuous(trans = 'log10',
+                        breaks = c(3, 5, 10, 20, 40, 60),
+                        limits = c(3, 60)) +
+     scale_x_continuous(breaks = seq(2015, 2023, 2),
+                        limits = c(2015, 2023)) +
+     theme_bw()+
+     theme(panel.grid.major.x = element_blank(),
+           panel.grid.minor.x = element_blank(),
+           axis.text.y = element_text(color = 'black', face = 'plain'),
+           axis.text.x = element_text(color = 'black', face = 'plain', hjust = 0.5),
+           axis.title = element_text(color = 'black', face = 'plain'),
+           legend.box = 'horizontal',
+           plot.title.position = 'plot',
+           legend.position = "bottom") +
+     labs(title = 'J',
+          color = NULL,
+          x = "Year",
+          y = "Median age")+
+     guides(color = guide_legend(nrow = 2))
 
-country_list <- sort(unique(df_clean$Country))
+# save --------------------------------------------------------------------
 
-set.seed(20240601)
+design <- "
+ABCDE
+FFFFF
+GGHIJ
+"
 
-# model test ----------------------------------------------------------------
+fig <- fig_min[[1]] + fig_min[[2]] + fig_min[[3]] + fig_min[[4]] + fig_min[[5]] + 
+     fig_1 + 
+     fig_2 + fig_min[[6]] + fig_min[[7]] + fig_min[[8]] + 
+     plot_layout(design = design, heights = c(1, 3, 1))
 
-i <- 1
-
-# Function to process time series analysis by country
-analyze_country <- function(i) {
-     df <- filter(df_clean, Country == country_list[i]) |> 
-          arrange(Date)
-     
-     if (!all(is.na(df$Month))) {
-          ts_data <- ts(df$Cases, start = c(2015, 1), frequency = 12)
-     } else {
-          ts_data <- ts(df$Cases, start = decimal_date(ymd(df$Date[1])), frequency = 365.25/7)
-     }
-     
-     # Perform sequence tests and forecast
-     adf_result <- adf.test(ts_data, alternative = 'stationary')
-     bl_test <- Box.test(ts_data, lag = ifelse(frequency(ts_data) == 12, 12, 54), type = 'Ljung-Box')
-     fig_acf <- autoplot(acf(ts_data, plot = F)) + 
-          labs(caption = paste("ADF Test p-value: ", format.pval(adf_result$p.value, digits = 4), sep = ""),
-               title = 'Autocorrelation Function')
-     fig_pacf <- autoplot(pacf(ts_data, plot = F))+
-          labs(caption = paste("Ljung-Box Test p-value: ", format.pval(bl_test$p.value, digits = 4), sep = ""),
-               title = 'Partial Autocorrelation Function')
-     
-     # Forecasting model
-     ts_train <- window(ts_data, start = 2015, end = 2019.5)
-     ts_test <- window(ts_data, start = 2019.5, end = 2020)
-     model <- auto.arima(ts_train, seasonal = TRUE, ic = 'aicc')
-     forecasted <- forecast(model, h = length(ts_test))
-     SMAPE <- smape(ts_test, forecasted$mean)
-     fig_forecast <- autoplot(forecasted) + 
-          geom_line(data = data.frame(date = time(ts_test), observed = as.matrix(ts_test)), aes(x = date, y = observed), color = "red") +
-          labs(caption = paste("SMAPE: ", formatC(SMAPE, format = "f", digits = 2), "%"),
-               title = 'Forecasting Validation',
-               x = 'Date', y = 'Cases')
-     
-     # Save results
-     ggsave(filename = paste0('./Outcome/S', i, '.png'),
-            plot = fig_acf + fig_pacf + fig_forecast,
-            width = 9, height = 3)
-     
-     # return results
-     return(country_list[i])
-}
-
-outcome <- lapply(1:length(country_list), analyze_country)
-
-# forecast 2021 -----------------------------------------------------------
-
-analysis_2021 <- function(i) {
-     df <- filter(df_clean, Country == country_list[i]) |> 
-          arrange(Date)
-     
-     if (!all(is.na(df$Month))) {
-          ts_data <- ts(df$AnnualizedInci, start = c(2015, 1), frequency = 12)
-     } else {
-          ts_data <- ts(df$AnnualizedInci, start = decimal_date(df$Date[1]), frequency = 365.25/7)
-     }
-     
-     ts_train <- window(ts_data, end = 2019.99)
-     ts_observed <- window(ts_data, start = 2020)
-     model <- auto.arima(ts_train, seasonal = T, ic = 'aicc')
-     outcome <- forecast(model, h = length(ts_observed))
-     df_model <- data.frame(
-          date = as.Date(date_decimal(as.numeric(time(ts_observed)))),
-          mean = as.matrix(outcome$mean),
-          lower_80 = outcome$lower[, "80%"],
-          upper_80 = outcome$upper[, "80%"],
-          lower_95 = outcome$lower[, "95%"],
-          upper_95 = outcome$upper[, "95%"],
-          observed = as.matrix(ts_observed),
-          country = country_list[i],
-          model = '2015-2019'
-     )
-     
-     return(df_model)
-}
-
-outcome_2021 <- lapply(1:length(country_list), analysis_2021)
-outcome_2021 <- bind_rows(outcome_2021)
-
-# forecast 2023 -----------------------------------------------------------
-
-analysis_2023 <- function(i) {
-     df <- filter(df_clean, Country == country_list[i]) |> 
-          arrange(Date)
-     
-     if (!all(is.na(df$Month))) {
-          ts_data <- ts(df$AnnualizedInci, start = c(2015, 1), frequency = 12)
-     } else {
-          ts_data <- ts(df$AnnualizedInci, start = decimal_date(df$Date[1]), frequency = 365.25/7)
-     }
-     
-     ts_train <- window(ts_data, end = 2023.5)
-     ts_observed <- window(ts_data, start = 2023.5)
-     
-     model <- auto.arima(ts_train, seasonal = T, ic = 'aicc')
-     outcome <- forecast(model, h = length(ts_observed))
-     df_model <- data.frame(
-          date = as.Date(date_decimal(as.numeric(time(ts_observed)))),
-          mean = as.matrix(outcome$mean),
-          lower_80 = outcome$lower[, "80%"],
-          upper_80 = outcome$upper[, "80%"],
-          lower_95 = outcome$lower[, "95%"],
-          upper_95 = outcome$upper[, "95%"],
-          observed = as.matrix(ts_observed),
-          country = country_list[i],
-          model = '2015-2022'
-     )
-     
-     return(df_model)
-}
-
-outcome_2023 <- lapply(1:length(country_list), analysis_2023)
-outcome_2023 <- bind_rows(outcome_2023)
-
-# fig ---------------------------------------------------------------------
-
-plot_data <- function(i){
-     data_predict <- outcome_2021 |> 
-          filter(country == country_list[i]) |> 
-          arrange(date)
-     
-     plot_breaks <- pretty(c(0, data_predict$mean, data_predict$observed))
-     plot_range <- range(plot_breaks)
-     
-     fig1 <- ggplot(data = data_predict, aes(x = date)) +
-          geom_line(aes(y = mean, color = 'Predicted')) +
-          geom_line(aes(y = observed, color = 'Observed'))+
-          stat_difference(aes(ymin = observed, ymax = mean),
-                          alpha = 0.3,
-                          levels = c("Decreased", "Increased"))+
-          coord_cartesian(xlim = as.Date(c('2020-1-1', '2024-6-1'))) +
-          scale_color_manual(values = fill_color[1:3]) +
-          scale_fill_manual(values = fill_color[6:5]) +
-          scale_x_date(expand = expansion(add = c(0, 0)),
-                       date_labels = "%Y") +
-          scale_y_continuous(expand = c(0, 0),
-                             breaks = plot_breaks,
-                             limits = range(plot_breaks)) +
-          theme_bw() +
-          theme(plot.title.position = "plot",
-                plot.caption.position = "plot",
-                plot.title = element_text(face = "bold", size = 14, hjust = 0),
-                panel.grid.major.y = element_blank(),
-                panel.grid.minor = element_blank(),
-                legend.text = element_text(face = "bold", size = 12),
-                legend.title = element_text(face = "bold", size = 12),
-                legend.box.background = element_rect(fill = "transparent", colour = "transparent"),
-                legend.background = element_rect(fill = "transparent", colour = "transparent"),
-                legend.position = 'bottom',
-                axis.title = element_text(face = "bold", size = 12, color = "black"),
-                axis.text.y = element_text(size = 12, color = "black"),
-                axis.text.x = element_text(size = 12, color = "black"),
-                plot.background = element_blank())+
-          labs(title = paste0(LETTERS[i], ': ', country_list[i]),
-               x = 'Date', y = 'Annualized Incidence',
-               color = 'Stage', fill = 'Stage')
-     
-     fig1
-}
-
-fig <- lapply(1:length(country_list), plot_data) |> 
-     wrap_plots(ncol = 2, widths = c(1, 1), guides = 'collect')&
-     theme(legend.position = 'bottom')
-
-ggsave(filename = './Outcome/Fig4.pdf',
-       plot = fig,
+ggsave("./Outcome/fig4.pdf",
+       fig,
        width = 12,
-       height = 10, 
+       height = 11,
        device = cairo_pdf,
-       family = 'Times New Roman')
+       family = "Times New Roman")
+
+# appendix ----------------------------------------------------------------
+
+write.xlsx(DataYear,
+           './Outcome/fig data/fig 4.xlsx')

@@ -20,7 +20,19 @@ DataNews <- read.csv('./Data/HealthmapData.csv') |>
      unique()
 
 df_clean <- read.csv('./Outcome/Table S1.csv') |> 
-     mutate(Date = as.Date(Date))
+     group_by(Country) |>
+     mutate(Date = as.Date(Date),
+            AnnualizedInci = case_when(all(is.na(Month)) ~ Incidence * 52.14,
+                                       all(!is.na(Month)) ~ Incidence * 12))
+
+df_year <- df_clean |> 
+     group_by(Country, Year) |>
+     summarise(Cases = sum(Cases, na.rm = TRUE),
+               Population = mean(Population, na.rm = TRUE),
+               .groups = 'drop') |> 
+     mutate(Incidence = Cases / Population)  |> 
+     filter(Year != 2024) |> 
+     mutate(Date = as.Date(paste0(Year, '-07-01')))
 
 # plot ---------------------------------------------------------------------
 
@@ -58,18 +70,12 @@ i <- 1
 
 plot_epidemic <- function(i){
      data <- df_clean |> 
-          filter(Country == country_list[i]) |> 
-          mutate(AnnualizedInci = case_when(all(is.na(Month)) ~ Incidence * 52.14,
-                                            all(!is.na(Month)) ~ Incidence * 12))
+          filter(Country == country_list[i])
      plot_breaks <- pretty(c(0, data$AnnualizedInci))
      plot_range <- range(plot_breaks)
      
-     data_year <- data |> 
-          group_by(Year) |> 
-          summarise(AnnualizedInci = mean(AnnualizedInci, na.rm = TRUE),
-                    .groups = 'drop') |> 
-          filter(Year != 2024) |> 
-          mutate(Date = as.Date(paste0(Year, '-07-01')))
+     data_year <- df_year |> 
+          filter(Country == country_list[i])
      
      fig_1 <- ggplot(data)+
           geom_rect(data = datafile_rect,
@@ -79,7 +85,7 @@ plot_epidemic <- function(i){
                     alpha = 0.2,
                     show.legend = T) +
           geom_col(data = data_year,
-                   mapping = aes(x = Date, y = AnnualizedInci),
+                   mapping = aes(x = Date, y = Incidence),
                    fill = fill_color[3],
                    position = 'dodge') +
           geom_line(aes(x = Date, y = AnnualizedInci), color = fill_color[1]) +
@@ -108,7 +114,7 @@ plot_epidemic <- function(i){
                plot.background = element_blank()
           ) +
           labs(title = paste0(LETTERS[i], ': ', country_list[i]),
-               y = 'Annualized incidence',
+               y = 'Annualized incidence\n',
                x = 'Date',
                fill = 'Stage')+
           guides(fill = guide_legend(nrow = 1,
@@ -131,5 +137,5 @@ ggsave(filename = './Outcome/Fig 2.pdf',
        device = cairo_pdf,
        family = 'Times New Roman')
 
-write.xlsx(df_clean,
+write.xlsx(df_year,
           './Outcome/fig data/fig 2.xlsx')

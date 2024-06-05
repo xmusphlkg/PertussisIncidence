@@ -28,9 +28,18 @@ DataNews <- read.csv('./Data/HealthmapData.csv') |>
 
 DataMapPlot <- DataNews |> 
      group_by(ISO3) |>
-     summarise(start_issue_date = min(issue_date),
+     summarise(issue_date = min(issue_date),
                .groups = 'drop') |> 
-     mutate(start_issue_date = as.numeric(difftime(start_issue_date, as.Date('2023-5-1'), units = 'days')))
+     mutate(start_issue_date = as.numeric(difftime(issue_date, as.Date('2023-5-1'), units = 'days')),
+            yearmonth = format(issue_date, "%Y %m"),
+            monthyear = format(issue_date, "%b %Y")) |> 
+     arrange(start_issue_date)
+
+DataCountry <- DataMapPlot |> 
+     rownames_to_column(var = "ID") |>
+     group_by(yearmonth, monthyear) |>
+     summarise(n = max(as.integer(ID)),
+               .groups = 'drop')
 DataMapPlot <- DataMap |> 
      left_join(DataMapPlot, by = c('iso_a3' = 'ISO3'))
 
@@ -38,11 +47,28 @@ DataMapPlot <- DataMap |>
 
 fill_color <- c("#E64B35FF", "#00A087FF")
 
+DataNews <- DataNews |> 
+     mutate(yearmonth = format(issue_date, "%Y %m"),
+            monthyear = format(issue_date, "%b %Y")) |> 
+     group_by(yearmonth, monthyear) |>
+     count() |> 
+     arrange(yearmonth)
+
 fig_1 <- ggplot(DataNews)+
-     geom_histogram(aes(x = issue_date, fill = alert_tag))+
-     scale_fill_manual(values = fill_color)+
-     scale_x_datetime(date_breaks = "1 month", date_labels = "%b %Y")+
+     geom_col(aes(x = monthyear, y = n),
+              fill = fill_color[1],
+              color = 'white')+
+     geom_line(data = DataCountry,
+               aes(x = monthyear, y = n*2, group = 1),
+               color = fill_color[2],
+               size = 1)+
+     geom_point(data = DataCountry,
+               aes(x = monthyear, y = n*2, group = 1),
+               color = fill_color[2],
+               size = 1)+
+     scale_x_discrete(limits = DataNews$monthyear)+
      scale_y_continuous(expand = expansion(mult = c(0, 0.1)),
+                        sec.axis = sec_axis(~ . * 0.5, name = "Cumlative number of alert country"),
                         limits = c(0, NA))+
      theme_bw()+
      theme(panel.grid = element_blank(),
@@ -53,11 +79,11 @@ fig_1 <- ggplot(DataNews)+
            legend.justification = c(0, 1),
            legend.background = element_blank(),
            plot.title.position = 'plot')+
-     labs(title = "A", x = NULL, y = 'News event', fill = 'Alert Tag')
+     labs(title = "A", x = NULL, y = 'Number of alert news', fill = 'Alert Tag')
 
 # fig 2 ----------------------------------------------------------------
 
-fill_color <- rev(c("#1D3141FF", "#096168FF", "#209478FF", "#75C56EFF", "#E2EE5EFF"))
+fill_color <- c("#E76254FF", "#EF8A47FF", "#F7AA58FF", "#FFD06FFF", "#FFE6B7FF", "#AADCE0FF", "#72BCD5FF", "#528FADFF", "#376795FF", "#1E466EFF")
 
 fig_2 <- ggplot(data = DataMapPlot) +
      geom_sf(aes(fill = start_issue_date)) +
@@ -84,7 +110,7 @@ fig_2 <- ggplot(data = DataMapPlot) +
      labs(title = "B", x = NULL, y = NULL, fill = 'Firsted issued date') +
      guides(fill = guide_legend(direction = "horizontal",
                                 keyheight = 0.5, 
-                                keywidth = 3/length(labels),
+                                keywidth = 3,
                                 title.position = 'top',
                                 title.hjust = 0.5,
                                 label.hjust = 0.5,
