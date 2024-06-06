@@ -114,7 +114,7 @@ plot_epidemic <- function(i){
                plot.background = element_blank()
           ) +
           labs(title = paste0(LETTERS[i], ': ', country_list[i]),
-               y = 'Annualized incidence\n',
+               y = 'Annualized incidence rate',
                x = 'Date',
                fill = 'Stage')+
           guides(fill = guide_legend(nrow = 1,
@@ -133,7 +133,7 @@ fig <- outcome |>
 ggsave(filename = './Outcome/Fig 2.pdf',
        plot = fig,
        width = 12,
-       height = 10, 
+       height = 12, 
        device = cairo_pdf,
        family = 'Times New Roman')
 

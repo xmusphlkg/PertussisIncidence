@@ -87,7 +87,7 @@ plot_compare <- function(i){
                              limits = plot_range) +
           labs(title = paste0(LETTERS[2*i-1], ': ', country_list[i]),
                x = ifelse(all(is.na(data$Month)), 'Week', 'Month'),
-               y = 'Annualized Incidence',
+               y = 'Annualized incidence rate',
                color = 'Stage', fill = 'Stage') +
           scale_color_manual(values = fill_color) +
           scale_fill_manual(values = fill_color) +
@@ -144,6 +144,6 @@ fig <- lapply(1:length(country_list), plot_compare) |>
 ggsave(filename = './Outcome/Fig3.pdf',
        plot = fig,
        width = 12,
-       height = 10, 
+       height = 12, 
        device = cairo_pdf,
        family = 'Times New Roman')
