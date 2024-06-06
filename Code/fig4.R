@@ -91,6 +91,7 @@ plot_ridges <- function(i){
           theme_bw()+
           theme(panel.grid.major.x = element_blank(),
                 panel.grid.minor.x = element_blank(),
+                plot.title = element_text(face = "bold", size = 14, hjust = 0),
                 axis.text.y = element_text(color = 'black', face = 'plain'),
                 axis.text.x = element_text(color = 'black', face = 'plain', hjust = 0.5),
                 axis.title = element_text(color = 'black', face = 'plain'),
@@ -134,6 +135,7 @@ fig_1 <- ggplot(data = DataMap) +
      theme_bw() +
      theme(panel.grid = element_blank(),
            plot.title.position = 'plot',
+           plot.title = element_text(face = "bold", size = 14, hjust = 0),
            panel.background = element_rect(fill = "#C1CDCD", color = NA),
            axis.text = element_text(color = 'black', face = 'plain'),
            axis.title = element_text(color = 'black', face = 'plain'),
@@ -163,6 +165,7 @@ fig_2 <- ggplot(data = DataYear) +
                         limits = c(2015, 2023)) +
      theme_bw()+
      theme(panel.grid.major.x = element_blank(),
+           plot.title = element_text(face = "bold", size = 14, hjust = 0),
            panel.grid.minor.x = element_blank(),
            axis.text.y = element_text(color = 'black', face = 'plain'),
            axis.text.x = element_text(color = 'black', face = 'plain', hjust = 0.5),
