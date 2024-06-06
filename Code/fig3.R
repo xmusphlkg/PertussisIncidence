@@ -86,7 +86,7 @@ plot_compare <- function(i){
                              breaks = plot_breaks,
                              limits = plot_range) +
           labs(title = paste0(LETTERS[2*i-1], ': ', country_list[i]),
-               x = ifelse(all(is.na(data$Month)), 'Week', 'Month'),
+               x = ifelse(all(is.na(data$Month)), 'Epidemiological week', 'Month'),
                y = 'Annualized incidence rate',
                color = 'Stage', fill = 'Stage') +
           scale_color_manual(values = fill_color) +
