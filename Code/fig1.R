@@ -6,6 +6,7 @@ library(openxlsx)
 library(sf)
 library(lubridate)
 library(paletteer)
+library(patchwork)
 
 Sys.setlocale("LC_TIME", "en")
 
@@ -80,10 +81,9 @@ DataPHSM <- DataPHSM |>
      mutate(MatchingDate = as.numeric(difftime(EarliestMatchingDate, as.Date('2023-5-1'), units = 'days')))
 
 # relation between the first alert and the first PHSM
-model <- lm(MatchingDate ~ start_issue_date, data = DataPHSM)
-model_summary <- summary(model)
-cor_coef <- cor(DataPHSM$start_issue_date, DataPHSM$MatchingDate, use = "complete.obs")
-p_value <- coef(model_summary)[2, 4] 
+test_result <- cor.test(DataPHSM$start_issue_date, DataPHSM$MatchingDate, method = "pearson", use = "complete.obs")
+cor_coef <- test_result$estimate
+p_value <- test_result$p.value
 
 fig3 <- ggplot(DataPHSM)+
      geom_point(aes(x = start_issue_date, y = MatchingDate),
@@ -130,10 +130,9 @@ plot_realtion <- function(i){
      names(data) <- c('start_issue_date', 'n')
      
      # relation between the first alert
-     model <- lm(n ~ start_issue_date, data = data)
-     model_summary <- summary(model)
-     cor_coef <- cor(data$start_issue_date, data$n, use = "complete.obs")
-     p_value <- coef(model_summary)[2, 4]
+     test_result <- cor.test(data$start_issue_date, data$n, method = "pearson", use = "complete.obs")
+     cor_coef <- test_result$estimate
+     p_value <- test_result$p.value
      
      fig <- ggplot(data)+
           geom_point(aes(x = start_issue_date, y = n),
