@@ -58,7 +58,8 @@ ggsave(filename = './preview.png',
 
 # figure 1 ----------------------------------------------------------------
 
-country_list <- sort(unique(df_clean$Country))
+country_list <- c('US', 'GB', 'SE', 'CN', 'JP',
+                  'SG', 'AU', 'NZ')
 
 split_dates <- c(as.Date(c("2015/1/1", "2020/1/1", "2023/7/1")), max(df_clean$Date))
 split_periods <- c("2015 Jan to 2019 Dec", "2020 Jan to 2023 Jun", "2023 Jun onwards")

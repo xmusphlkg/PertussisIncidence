@@ -18,7 +18,8 @@ fill_color <- paletteer_d("ggsci::nrc_npg")
 df_clean <- read.csv('./Outcome/Table S1.csv') |> 
      mutate(Date = as.Date(Date))
 
-country_list <- sort(unique(df_clean$Country))
+country_list <- c('US', 'GB', 'SE', 'CN', 'JP',
+                  'SG', 'AU', 'NZ')
 
 # fig ----------------------------------------------------------------------
 
