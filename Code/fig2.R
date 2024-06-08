@@ -32,7 +32,7 @@ df_year <- df_clean |>
                .groups = 'drop') |> 
      mutate(Incidence = Cases / Population)  |> 
      filter(Year != 2024) |> 
-     mutate(Date = as.Date(paste0(Year, '-07-01')))
+     mutate(Date = as.Date(paste0(Year, '-01-01')))
 
 # plot ---------------------------------------------------------------------
 
@@ -70,13 +70,25 @@ datafile_rect <- data.frame(Period = split_periods,
 i <- 1
 
 plot_epidemic <- function(i){
+     data_year <- df_year |> 
+          filter(Country == country_list[i]) |> 
+          select(Date, Incidence) |> 
+          mutate(Type = 'Annual') |> 
+          rename(AnnualizedInci = Incidence)
+     data_year <- data_year |> 
+          mutate(Date = Date + years(1) - days(1)) |> 
+          rbind(data_year) |> 
+          arrange(Date)
+     
      data <- df_clean |> 
-          filter(Country == country_list[i])
+          filter(Country == country_list[i]) |> 
+          ungroup() |> 
+          select(Date, AnnualizedInci) |> 
+          mutate(Type = 'Annualized') |> 
+          rbind(data_year)
+     
      plot_breaks <- pretty(c(0, data$AnnualizedInci))
      plot_range <- range(plot_breaks)
-     
-     data_year <- df_year |> 
-          filter(Country == country_list[i])
      
      fig_1 <- ggplot(data)+
           geom_rect(data = datafile_rect,
@@ -85,11 +97,7 @@ plot_epidemic <- function(i){
                     ymax = Inf,
                     alpha = 0.2,
                     show.legend = T) +
-          geom_col(data = data_year,
-                   mapping = aes(x = Date, y = Incidence),
-                   fill = fill_color[3],
-                   position = 'dodge') +
-          geom_line(aes(x = Date, y = AnnualizedInci), color = fill_color[1]) +
+          geom_line(aes(x = Date, y = AnnualizedInci, color = Type)) +
           scale_x_date(date_labels = '%Y',
                        date_breaks = 'year',
                        limits = range(df_clean$Date),
@@ -98,6 +106,7 @@ plot_epidemic <- function(i){
                              breaks = plot_breaks,
                              expand = expansion(mult = c(0, 0))) +
           scale_fill_manual(values = fill_color[c(5:7)]) +
+          scale_color_manual(values = fill_color[c(3, 1)]) +
           theme_bw() +
           theme(
                plot.title.position = "plot",
@@ -115,8 +124,9 @@ plot_epidemic <- function(i){
                plot.background = element_blank()
           ) +
           labs(title = paste0(LETTERS[i], ': ', country_list[i]),
-               y = 'Annualized incidence rate',
+               y = 'Incidence rate',
                x = 'Date',
+               color = 'Incidence rate',
                fill = 'Stage')+
           guides(fill = guide_legend(nrow = 1,
                                      title.position = 'left'))
@@ -134,7 +144,7 @@ fig <- outcome |>
 ggsave(filename = './Outcome/Fig 2.pdf',
        plot = fig,
        width = 12,
-       height = 12, 
+       height = 10, 
        device = cairo_pdf,
        family = 'Times New Roman')
 
