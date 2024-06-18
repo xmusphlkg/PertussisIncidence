@@ -4,6 +4,7 @@ library(lubridate)
 library(ggsci)
 library(patchwork)
 library(openxlsx)
+library(paletteer)
 
 library(lme4)
 library(lmerTest)
@@ -32,7 +33,8 @@ plot_compare <- function(i){
                                 ifelse(Date < as.Date('2023-07-01'), '2020 Jan to 2023 Jun',
                                        '2023 Jun onwards')),
                  AnnualizedInci = case_when(all(is.na(Month)) ~ Incidence * 52.14,
-                                            all(!is.na(Month)) ~ Incidence * 12))
+                                            all(!is.na(Month)) ~ Incidence * 12)) |> 
+          select(stage, AnnualizedInci, Week, Month)
      if (!all(is.na(data$Month))){
           xaxis_values <- c(7:12, 1:6)
           xaxis_labels <- month.abb[xaxis_values]
@@ -61,7 +63,7 @@ plot_compare <- function(i){
      data_2022 <- data |> 
           filter(stage != '2023 Jun onwards')
 
-     results <- lmer(Cases ~ stage + (1|xaxis), data = data)
+     results <- lmer(AnnualizedInci ~ stage + (1|xaxis), data = data)
      emm <- emmeans(results, ~ stage)
      pairs <- pairs(emm)
      pairs_summary <- summary(pairs, adjust = "bonferroni") |> 
@@ -86,7 +88,7 @@ plot_compare <- function(i){
           scale_y_continuous(expand = c(0, 0),
                              breaks = plot_breaks,
                              limits = plot_range) +
-          labs(title = paste0(LETTERS[2*i-1], ': ', country_list[i]),
+          labs(title = paste0(LETTERS[2*i-1]),
                x = ifelse(all(is.na(data$Month)), 'Epidemiological week', 'Month'),
                y = 'Annualized incidence rate',
                color = 'Stage', fill = 'Stage') +
@@ -148,3 +150,15 @@ ggsave(filename = './Outcome/Fig3.pdf',
        height = 12, 
        device = cairo_pdf,
        family = 'Times New Roman')
+
+# appendix ----------------------------------------------------------------
+
+data_2022 <- map(1:length(country_list), function(i){fig[[i]][[1]]$data})
+data_2022 <- do.call('rbind', data_2022)
+
+data_2023 <- map(1:length(country_list), function(i){fig[[i]][[2]]$data})
+data_2023 <- do.call('rbind', data_2023)
+
+data <- rbind(data_2022, data_2023)
+
+write.csv(data, './Outcome/fig data/fig 3.xlsx')
