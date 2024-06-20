@@ -49,7 +49,7 @@ DataCountry <- DataMapPlot |>
      summarise(n = max(as.integer(ID)),
                .groups = 'drop')
 
-DataPHSM <- read.csv('./Data/OxCGRT_simplified_v1 (1).csv')
+DataPHSM <- read.csv('./Data/OxCGRT_PHSM.csv')
 DataPHSM <- DataPHSM |> 
      filter(CountryCode %in% DataMapPlot$ISO3 & Jurisdiction == 'NAT_TOTAL') |> 
      mutate(Date = as.Date(as.character(Date), format = "%Y%m%d")) |> 

@@ -6,10 +6,10 @@ library(openxlsx)
 
 # data --------------------------------------------------------------------
 
-DataPop <- read.xlsx("./Data/Pertussis incidence week or month.xlsx", sheet = 'Population')
+DataPop <- read.xlsx("./Data/Pertussis incidence.xlsx", sheet = 'Population')
 Countries <- unique(DataPop$Name)
 DataInc <- map(Countries,
-               ~read.xlsx(paste0("./Data/Pertussis incidence week or month.xlsx"),
+               ~read.xlsx(paste0("./Data/Pertussis incidence.xlsx"),
                           sheet = .x,
                           detectDates = T))
 DataInc <- do.call(rbind, DataInc) |> 
