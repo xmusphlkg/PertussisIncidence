@@ -100,7 +100,7 @@ plot_compare <- function(i){
                 plot.title = element_text(face = "bold", size = 14, hjust = 0),
                 panel.grid.major.y = element_blank(),
                 panel.grid.minor = element_blank(),
-                legend.text = element_text(face = "bold", size = 12),
+                legend.text = element_text(size = 12),
                 legend.title = element_text(face = "bold", size = 12),
                 legend.box.background = element_rect(fill = "transparent", colour = "transparent"),
                 legend.background = element_rect(fill = "transparent", colour = "transparent"),
@@ -129,8 +129,8 @@ plot_compare <- function(i){
                 plot.title = element_text(face = "bold", size = 14, hjust = 0),
                 panel.grid.major.y = element_blank(),
                 panel.grid.minor = element_blank(),
-                legend.text = element_text(face = "bold", size = 12),
                 legend.title = element_text(face = "bold", size = 12),
+                legend.text = element_text(size = 12),
                 legend.box.background = element_rect(fill = "transparent", colour = "transparent"),
                 legend.background = element_rect(fill = "transparent", colour = "transparent"),
                 axis.title = element_text(face = "bold", size = 12, color = "black"),
@@ -144,7 +144,7 @@ fig <- lapply(1:length(country_list), plot_compare) |>
      wrap_plots(ncol = 2, widths = c(1, 1), guides = 'collect')&
      theme(legend.position = 'bottom')
 
-ggsave(filename = './Outcome/Fig3.pdf',
+ggsave(filename = './Outcome/Fig 3.pdf',
        plot = fig,
        width = 12,
        height = 12, 

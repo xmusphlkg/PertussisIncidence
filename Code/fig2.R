@@ -114,8 +114,8 @@ plot_epidemic <- function(i){
                plot.title = element_text(face = "bold", size = 14, hjust = 0),
                panel.grid.major.y = element_blank(),
                panel.grid.minor = element_blank(),
-               legend.text = element_text(face = "bold", size = 12),
                legend.title = element_text(face = "bold", size = 12),
+               legend.text = element_text(size = 12),
                legend.box.background = element_rect(fill = "transparent", colour = "transparent"),
                legend.background = element_rect(fill = "transparent", colour = "transparent"),
                axis.title = element_text(face = "bold", size = 12, color = "black"),
@@ -123,7 +123,7 @@ plot_epidemic <- function(i){
                axis.text.x = element_text(size = 12, color = "black", hjust = 0),
                plot.background = element_blank()
           ) +
-          labs(title = paste0(LETTERS[i], ': ', country_list[i]),
+          labs(title = LETTERS[i],
                y = 'Incidence rate',
                x = 'Date',
                color = 'Incidence rate',

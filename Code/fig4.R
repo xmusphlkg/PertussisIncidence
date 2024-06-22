@@ -84,7 +84,7 @@ plot_ridges <- function(i){
           scale_fill_gradientn(colours = fill_color[c(1:4, 7:10)],
                                breaks = seq(0, 100, 10),
                                limits = c(0, 100))+
-          labs(title = paste(LETTERS[i], country_names[i], sep = ": "),
+          labs(title = LETTERS[i],
                x = 'Age',
                y = 'Year',
                fill = "Age") +
@@ -94,12 +94,14 @@ plot_ridges <- function(i){
                 plot.title = element_text(face = "bold", size = 14, hjust = 0),
                 axis.text.y = element_text(color = 'black', face = 'plain'),
                 axis.text.x = element_text(color = 'black', face = 'plain', hjust = 0.5),
-                axis.title = element_text(color = 'black', face = 'plain'),
+                axis.title = element_text(face = "bold", size = 12, color = "black"),
                 legend.box = 'horizontal',
+                legend.text = element_text(size = 12),
+                legend.title = element_text(face = "bold", size = 12),
                 plot.title.position = 'plot',
                 plot.background = element_blank(),
                 legend.position = if_else(i == 7, 'bottom', 'none'))+
-          guides(fill = guide_colorbar(barwidth = 20,
+          guides(fill = guide_colorbar(barwidth = 25,
                                        vjust = 0))
      fig
 }
@@ -122,7 +124,8 @@ DataYear <- DataAll |>
 fig_1 <- ggplot(data = DataYear) +
      geom_point(aes(x = Year, y = MedianAge, color = country)) +
      geom_line(aes(x = Year, y = MedianAge, color = country)) +
-     scale_color_manual(values = fill_color) +
+     scale_color_manual(values = fill_color,
+                        breaks = country_names) +
      scale_y_continuous(trans = 'log10',
                         breaks = c(1, 5, 10, 20, 40, 60),
                         limits = c(1, 60)) +
@@ -135,15 +138,17 @@ fig_1 <- ggplot(data = DataYear) +
            panel.grid.minor.x = element_blank(),
            axis.text.y = element_text(color = 'black', face = 'plain'),
            axis.text.x = element_text(color = 'black', face = 'plain', hjust = 0.5),
-           axis.title = element_text(color = 'black', face = 'plain'),
+           axis.title = element_text(face = "bold", size = 12, color = "black"),
            legend.box = 'horizontal',
+           legend.text = element_text(size = 12),
+           legend.title = element_text(face = "bold", size = 12),
            plot.title.position = 'plot',
            legend.position = "bottom") +
      labs(title = 'I',
           color = 'Country',
           x = "Year",
           y = "Median age")+
-     guides(color = guide_legend(nrow = 1))
+     guides(color = guide_legend(nrow = 2, byrow = T))
 
 # save --------------------------------------------------------------------
 
@@ -158,7 +163,7 @@ fig <- fig_min[[1]] + fig_min[[2]] + fig_min[[3]] + fig_min[[4]] + fig_min[[5]] 
      plot_layout(design = design, heights = c(1, 1, 1), guides = 'collect') &
      theme(legend.position = 'bottom')
 
-ggsave("./Outcome/fig4.pdf",
+ggsave("./Outcome/Fig 4.pdf",
        fig,
        width = 12,
        height = 6,

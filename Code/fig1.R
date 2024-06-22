@@ -186,7 +186,8 @@ fig1 <- ggplot(DataNews)+
      theme(panel.grid = element_blank(),
            plot.title = element_text(face = "bold", size = 14, hjust = 0),
            axis.text = element_text(color = 'black', face = 'plain'),
-           axis.title = element_text(color = 'black', face = 'plain'),
+           axis.title = element_text(face = "bold", size = 12, color = "black"),
+           legend.title = element_text(face = "bold", size = 12),
            legend.position = c(0, 1),
            legend.justification = c(0, 1),
            legend.background = element_blank(),
@@ -215,14 +216,15 @@ fig2 <- ggplot(data = DataMapPlot) +
            plot.title = element_text(face = "bold", size = 14, hjust = 0),
            panel.background = element_rect(fill = "#C1CDCD", color = NA),
            axis.text = element_text(color = 'black', face = 'plain'),
-           axis.title = element_text(color = 'black', face = 'plain'),
+           axis.title = element_text(face = "bold", size = 12, color = "black"),
            legend.position = 'bottom',
+           legend.title = element_text(face = "bold", size = 12),
            legend.background = element_rect(fill = "white"),
            plot.title.position = 'plot') +
      labs(title = "B", x = NULL, y = NULL, fill = 'First alert issued date') +
      guides(fill = guide_legend(direction = "horizontal",
                                 keyheight = 0.5, 
-                                keywidth = 2.8,
+                                keywidth = 2.5,
                                 title.position = 'top',
                                 title.hjust = 0.5,
                                 label.hjust = 0.5,
@@ -240,9 +242,9 @@ fig_2 <- fig3 + fig4[[1]] + fig4[[2]] + fig4[[3]] + fig4[[4]] + fig4[[5]]+
 fig <- cowplot::plot_grid(fig_1, fig_2, ncol = 2)
 
 ggsave(filename = './Outcome/Fig 1.pdf',
-       plot = fig,
-       width = 14,
-       height = 8, 
+       plot = fig_1,
+       width = 7,
+       height = 7, 
        device = cairo_pdf,
        family = 'Times New Roman')
 
