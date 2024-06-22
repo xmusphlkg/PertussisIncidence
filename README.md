@@ -12,3 +12,7 @@
 | Singapore | SG | Weekly | [WEEKLY INFECTIOUS DISEASES BULLETIN](https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2015/weekly-infectious-diseases-bulletin) |
 | Australia | AU | Monthly | [National Notifiable Diseases Surveillance System](https://www.health.gov.au/resources/collections/nndss-fortnightly-reports)|
 | New Zealand | NZ | Monthly | [Pertussis Dashboard](https://www.esr.cri.nz/digital-library/pertussis-dashboard/) |
+
+## Data Preview
+
+![preview](preview.png)
