@@ -15,7 +15,7 @@ DataInc <- map(Countries,
 DataInc <- do.call(rbind, DataInc) |> 
      left_join(DataPop, by = c('Country' = 'Name', 'Year' = 'Year')) |> 
      mutate(Incidence = Cases / Population) |> 
-     filter(Date < as.Date('2024/5/1'))
+     filter(Date < as.Date('2024/6/1'))
 
 ## check the data is complete
 DataInc |> 
