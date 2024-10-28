@@ -30,13 +30,14 @@ plot_compare <- function(i){
      data <- df_clean |> 
           filter(Country == country_list[i]) |> 
           mutate(stage = ifelse(Date < as.Date('2020-01-01'), '2015 Jan to 2019 Dec',
-                                ifelse(Date < as.Date('2023-07-01'), '2020 Jan to 2023 Jun',
-                                       '2023 Jun onwards')),
+                                ifelse(Date < as.Date('2024-01-01'), '2020 Jan to 2023 Dec',
+                                       '2024 Jan onwards')),
                  AnnualizedInci = case_when(all(is.na(Month)) ~ Incidence * 52.14,
                                             all(!is.na(Month)) ~ Incidence * 12)) |> 
           select(stage, AnnualizedInci, Week, Month)
+     
      if (!all(is.na(data$Month))){
-          xaxis_values <- c(7:12, 1:6)
+          xaxis_values <- 1:12
           xaxis_labels <- month.abb[xaxis_values]
           xaxis_breaks <- 101:112
           data <- data |> 
@@ -45,8 +46,8 @@ plot_compare <- function(i){
                                      labels = xaxis_breaks),
                       xaxis = as.integer(as.character(xaxis)))
      } else {
-          xaxis_values <- c(26:52, 1:25)
-          xaxis_labels <- c(26:52, 1:25)
+          xaxis_values <- 1:52
+          xaxis_labels <- 1:52
           xaxis_breaks <- 201:252
           data <- data |> 
                mutate(xaxis = factor(Week,
@@ -59,9 +60,9 @@ plot_compare <- function(i){
      plot_range <- range(plot_breaks)
      
      data_2023 <- data |> 
-          filter(stage == '2023 Jun onwards')
+          filter(stage == '2024 Jan onwards')
      data_2022 <- data |> 
-          filter(stage != '2023 Jun onwards')
+          filter(stage != '2024 Jan onwards')
 
      results <- lmer(AnnualizedInci ~ stage + (1|xaxis), data = data)
      emm <- emmeans(results, ~ stage)
@@ -80,14 +81,14 @@ plot_compare <- function(i){
                       show.legend = F,
                       linewidth = 1,
                       se = T) +
-          geom_line(data = data_2023, aes(color = stage),
+          geom_path(data = data_2023, aes(color = stage),
                     linewidth = 1) +
           scale_x_continuous(breaks = xaxis_breaks[seq(1, length(xaxis_breaks), by = length(xaxis_breaks) /12)],
                              labels = xaxis_labels[seq(1, length(xaxis_breaks), by = length(xaxis_breaks) /12)],
                              expand = c(0, 0)) +
           scale_y_continuous(expand = c(0, 0),
-                             breaks = plot_breaks,
-                             limits = plot_range) +
+                             breaks = plot_breaks) +
+          coord_cartesian(ylim = plot_range) +
           labs(title = paste0(LETTERS[2*i-1]),
                x = ifelse(all(is.na(data$Month)), 'Epidemiological week', 'Month'),
                y = 'Annualized incidence rate',

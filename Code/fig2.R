@@ -63,8 +63,8 @@ country_list <- c('US', 'GB',
                   'JP', 'SG',
                   'AU', 'NZ')
 
-split_dates <- c(as.Date(c("2015/1/1", "2020/1/1", "2023/7/1")), max(df_clean$Date))
-split_periods <- c("2015 Jan to 2019 Dec", "2020 Jan to 2023 Jun", "2023 Jun onwards")
+split_dates <- c(as.Date(c("2015/1/1", "2020/1/1", "2024/1/1")), max(df_clean$Date))
+split_periods <- c("2015 Jan to 2019 Dec", "2020 Jan to 2023 Dec", "2024 Jan onwards")
 datafile_rect <- data.frame(Period = split_periods,
                             start = split_dates[1:3],
                             end = split_dates[2:4])
