@@ -150,5 +150,5 @@ ggsave(filename = './Outcome/Fig 2.pdf',
        device = cairo_pdf,
        family = 'Times New Roman')
 
-write.xlsx(df_year,
+write.xlsx(list(df_clean = df_clean, df_year = df_year),
           './Outcome/fig data/fig 2.xlsx')
