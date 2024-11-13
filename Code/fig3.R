@@ -34,7 +34,7 @@ plot_compare <- function(i){
                                        '2024 Jan onwards')),
                  AnnualizedInci = case_when(all(is.na(Month)) ~ Incidence * 52.14,
                                             all(!is.na(Month)) ~ Incidence * 12)) |> 
-          select(stage, AnnualizedInci, Week, Month)
+          select(stage, AnnualizedInci, Week, Month, Year)
      
      if (!all(is.na(data$Month))){
           xaxis_values <- 1:12
@@ -76,6 +76,10 @@ plot_compare <- function(i){
                  p.value = ifelse(p.value < 0.001, '***', format(round(p.value, 3), nsmall = 3)))
      
      fig1_1 <- ggplot(data_2022, aes(x = xaxis, y = AnnualizedInci)) +
+          geom_point(aes(group = Year, color = stage),
+                     alpha = 0.5) +
+          geom_path(aes(group = Year, color = stage),
+                    alpha = 0.5) +
           geom_smooth(aes(color = stage, fill = stage),
                       method = 'gam',
                       show.legend = F,
