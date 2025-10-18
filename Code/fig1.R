@@ -27,11 +27,29 @@ DataNews <- read.csv('./Outcome/Table S2.csv') |>
      left_join(read.csv('./Data/iso3.csv'), by = c('country' = 'Country')) |> 
      mutate(issue_date = as.Date(issue_date))
 
+DataNews |> 
+     mutate(year = year(issue_date)) |>
+     group_by(year) |>
+     summarise(total_n = n(),
+               percent = n()/nrow(DataNews) * 100,
+               .groups = 'drop')
+
+# Table S3: Distribution of alert news by country
+
+DataNews |> 
+     group_by(ISO3) |>
+     summarise(total_n = n(),
+               percent = n()/nrow(DataNews) * 100,
+               .groups = 'drop') |> 
+     arrange(desc(total_n)) |> 
+     mutate(percent = format(round(percent, 2), nsmall = 2)) |> 
+     write.csv('./Outcome/Table S3.csv', row.names = F)
+
 DataMapPlot <- DataNews |> 
      group_by(ISO3) |>
      summarise(issue_date = min(issue_date),
                .groups = 'drop') |> 
-     mutate(start_issue_date = as.numeric(difftime(issue_date, as.Date('2023-5-1'), units = 'days')),
+     mutate(start_issue_date = as.numeric(difftime(issue_date, as.Date('2023-1-1'), units = 'days')),
             yearmonth = format(issue_date, "%Y %m"),
             monthyear = format(issue_date, "%b %Y")) |> 
      arrange(start_issue_date)
@@ -43,13 +61,19 @@ DataNews <- DataNews |>
      arrange(yearmonth) |> 
      ungroup() |>
      # add breaks for each month
-     complete(yearmonth = seq.Date(from = as.Date('2023-05-01'),
+     complete(yearmonth = seq.Date(from = as.Date('2023-01-01'),
                                    to = as.Date('2025-10-01'),
                                    by = 'month') |> format('%Y %m'),
               fill = list(n = 0)) |>
      arrange(yearmonth) |>
      mutate(issue_date = as.Date(paste0(yearmonth, ' 01'), '%Y %m %d'),
-            monthyear = format(issue_date, "%b %Y"))
+            monthyear = format(issue_date, "%b %Y"),
+            year = year(issue_date))
+
+DataNews |> 
+     group_by(year) |>
+     summarise(total_n = sum(n),
+               .groups = 'drop')
 
 DataCountry <- DataMapPlot |> 
      rownames_to_column(var = "ID") |>
@@ -64,17 +88,24 @@ DataCountry <- DataMapPlot |>
      # using last observation carried forward to fill in missing values
      mutate(n = zoo::na.locf(n, na.rm = FALSE),
             issue_date = as.Date(paste0(yearmonth, ' 01'), '%Y %m %d'),
-            monthyear = format(issue_date, "%b %Y"))
+            monthyear = format(issue_date, "%b %Y"),
+            year = year(issue_date),
+            n_prev = lag(n, default = 0))
+
+DataCountry |> 
+     group_by(year) |>
+     summarise(total_n = max(n),
+               .groups = 'drop')
 
 # fig 1 -----------------------------------------------------------------
 
-fill_color <- c("#E64B35FF", "#00A087FF")
+fill_color <- c("#BC3C29FF", "#0072B5FF")
 
 fig1 <- ggplot(DataNews)+
      geom_col(aes(x = issue_date, y = n),
-              fill = fill_color[1],
+              fill = fill_color[2],
               color = 'white')+
-     scale_x_date(limits = c(as.Date('2023-5-1'), as.Date('2025-10-31')),
+     scale_x_date(limits = c(as.Date('2022-12-1'), as.Date('2025-10-31')),
                   date_labels = "%b %Y",
                   expand = expansion(add = c(0, 0)))+
      scale_y_continuous(expand = expansion(mult = c(0, 0)),
@@ -92,11 +123,13 @@ fig1 <- ggplot(DataNews)+
            plot.title.position = 'plot')+
      labs(title = "A", x = NULL, y = 'Number of alert news', fill = 'Alert Tag')
 
-fig2 <- ggplot(DataNews)+
-     geom_col(data = DataCountry,
-              aes(x = issue_date, y = n),
-              fill = fill_color[2])+
-     scale_x_date(limits = c(as.Date('2023-5-1'), as.Date('2025-10-31')),
+fig2 <- ggplot(data = DataCountry)+
+     geom_rect(aes(xmin = issue_date - 14,
+                   xmax = issue_date + 14,
+                   ymin = n_prev,
+                   ymax = n),
+               fill = fill_color[1]) +
+     scale_x_date(limits = c(as.Date('2022-12-1'), as.Date('2025-10-31')),
                   date_labels = "%b %Y",
                   expand = expansion(add = c(0, 0)))+
      scale_y_continuous(expand = expansion(mult = c(0, 0)),
@@ -118,10 +151,10 @@ fig2 <- ggplot(DataNews)+
 
 fill_color <- c("#6B200CFF", "#973D21FF", "#DA6C42FF", "#EE956AFF", "#FBC2A9FF", "#BAD6F9FF", "#7DB0EAFF", "#447FDDFF", "#225BB2FF", "#133E7EFF")
 
-DataMapPlot <- DataMap |> 
+DataMap <- DataMap |> 
      left_join(DataMapPlot, by = c('iso_a3' = 'ISO3'))
 
-fig3 <- ggplot(data = DataMapPlot) +
+fig3 <- ggplot(data = DataMap) +
      geom_sf(aes(fill = start_issue_date)) +
      # add x, y tick labels
      theme(axis.text.x = element_text(size = 8),
@@ -130,9 +163,9 @@ fig3 <- ggplot(data = DataMapPlot) +
                         expand = c(0, 0)) + 
      scale_y_continuous(limits = c(-70, 75)) +
      scale_fill_gradientn(colors = fill_color,
-                          limits = c(0, 900),
-                          breaks = seq.Date(as.Date('2023-5-1'), as.Date('2025-10-16'), by = '2 month') - as.Date('2023-5-1'),
-                          labels = c('May\n2023', 'Jul', 'Sep', 'Nov',
+                          limits = c(0, 1000),
+                          breaks = seq.Date(as.Date('2023-1-1'), as.Date('2025-10-16'), by = '2 month') - as.Date('2023-1-1'),
+                          labels = c('Jan\n2023', 'Mar', 'May', 'Jul', 'Sep', 'Nov',
                                      'Jan\n2024', 'Mar', 'May', 'Jul', 'Sep', 'Nov',
                                      'Jan\n2025', 'Mar', 'May', 'Jul', 'Sep'),
                           na.value = "white")+
@@ -148,18 +181,16 @@ fig3 <- ggplot(data = DataMapPlot) +
            legend.background = element_rect(fill = "white"),
            plot.title.position = 'plot') +
      labs(title = "C", x = NULL, y = NULL, fill = 'First alert issued date') +
-     guides(fill = guide_legend(direction = "horizontal",
-                                keyheight = 0.5,
-                                title.position = 'left',
-                                title.hjust = 0.5,
-                                title.vjust = 1,
-                                label.hjust = 0.5,
-                                nrow = 1,
-                                byrow = TRUE,
-                                label.position = "bottom"))
+     guides(fill = guide_colorbar(direction = "horizontal",
+                                  barwidth = 45,
+                                  keyheight = 0.5,
+                                  title.position = 'top',
+                                  title.hjust = 0,
+                                  label.hjust = 0.5,
+                                  label.position = "bottom"))
 
 # focus on europe --------------------------------------------------------
-fig3_minor <- ggplot(data = DataMapPlot) +
+fig3_minor <- ggplot(data = DataMap) +
      geom_sf(aes(fill = start_issue_date),
              show.legend = F) +
      # add x, y tick labels
@@ -195,7 +226,7 @@ fig_1 <- cowplot::plot_grid(fig1/fig2 + plot_layout(heights = c(0.4, 0.6)),
 
 ggsave(filename = './Outcome/Fig 1.pdf',
        plot = fig_1,
-       width = 14,
+       width = 13,
        height = 6, 
        device = cairo_pdf,
        family = 'Times New Roman')

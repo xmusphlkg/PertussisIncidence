@@ -29,6 +29,14 @@ df_year <- df_clean |>
      mutate(Incidence = Cases / Population)  |> 
      mutate(Date = as.Date(paste0(Year, '-01-01')))
 
+# find peak time
+df_clean |> 
+     filter(Date >= as.Date('2020-01-01')) |> 
+     group_by(Country) |>
+     slice_max(order_by = Cases, n = 1) |> 
+     select(Country, Date, Cases, Incidence) |> 
+     arrange(desc(Date))
+
 # plot ---------------------------------------------------------------------
 
 fig <- ggplot(df_clean, aes(x = Date, y = Cases, color = Country)) +
@@ -58,7 +66,9 @@ country_list <- c('US', 'GB',
 df_count <- df_clean |> 
      group_by(Country, Year) |>
      summarise(Cases = sum(Cases, na.rm = TRUE),
-               .groups = 'drop')
+               .groups = 'drop') |> 
+     group_by(Year) |>
+     mutate(CasesPercent = round(Cases / sum(Cases, na.rm = TRUE), 4))
 
 fig1 <- ggplot(df_count, aes(x = Year, y = Cases, fill = Country)) +
      # percent stacked bar chart

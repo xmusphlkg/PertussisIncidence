@@ -27,8 +27,8 @@ url = "https://www.healthmap.org/getAlerts.php"
 params = {
     "category[]": ["1"],
     "diseases[]": "100",
-    "sdate": "05/01/2023",
-    "edate": "10/16/2025",
+    "sdate": "01/01/2023",
+    "edate": "10/18/2025",
     "heatscore": "1",
     "partner": "hm"
 }
@@ -48,7 +48,7 @@ if response.status_code == 200:
             all_news_items.append(item)
 
     df = pd.DataFrame(all_news_items)
-    df.to_csv("Data/HealthmapData_20230501_20251016.csv", index=False)
-    print("Data has been saved to 'HealthmapData_20230501_20251016.csv'.")
+    df.to_csv("Data/HealthmapData.csv", index=False)
+    print("Data has been saved to 'HealthmapData.csv'.")
 else:
     print("Failed to retrieve data:", response.status_code)

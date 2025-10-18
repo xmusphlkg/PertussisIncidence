@@ -28,7 +28,7 @@ write.csv(DataInc, './Outcome/Table S1.csv', row.names = F)
 
 # map data ----------------------------------------------------------------
 
-DataNews <- read.csv('./Data/HealthmapData_20230501_20251016.csv')
+DataNews <- read.csv('./Data/HealthmapData.csv')
 # extract the country name from the place_name, if contains a ", " then the country name is after the ", ", else the country name is the place_name
 DataNews <- DataNews |> 
      mutate(country = ifelse(grepl(", ", place_name), 
@@ -36,7 +36,7 @@ DataNews <- DataNews |>
                             place_name)) |> 
      select(country, issue_date = date) |> 
      mutate(issue_date = as.Date(issue_date),
-            start_issue_date = as.numeric(difftime(issue_date, as.Date('2023-5-1'), units = 'days')))
+            start_issue_date = as.numeric(difftime(issue_date, as.Date('2023-1-1'), units = 'days')))
 
 DataNews <- DataNews |> 
      # replace Hong Kong, Macau, and Taiwan with China

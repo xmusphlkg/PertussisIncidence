@@ -30,6 +30,9 @@ DataAge <- lapply(country_names, function(x){
      filter(Age != 'Unknow', !is.na(Incidence)) |> 
      mutate(Incidence = round(Incidence))
 
+TotalCases <- DataAge |>
+     group_by(Country, Year) |>
+     summarise(TotalIncidence = sum(Incidence, na.rm = TRUE), .groups = 'drop')
 
 # figure --------------------------------------------------------------------
 
@@ -76,6 +79,10 @@ plot_ridges <- function(i, DataAll){
      data <- DataAll |> 
           filter(country == country_names[i])
      
+     # Filter total cases for the current country
+     data_totals <- TotalCases |>
+          filter(Country == country_names[i])
+     
      fig <- ggplot(data) +
           geom_density_ridges_gradient(mapping = aes(x = Age,
                                                      y = Year,
@@ -86,6 +93,13 @@ plot_ridges <- function(i, DataAll){
                                        color = 'white',
                                        stat = "identity",
                                        rel_min_height = 0.01) +
+          geom_text(data = data_totals,
+                    aes(x = 70,
+                        y = Year, 
+                        label = paste0("N:", format(TotalIncidence, big.mark = ","))), 
+                    hjust = 0,
+                    vjust = -0.2,
+                    size = 3.5) +
           scale_x_continuous(limits = c(0, 100),
                              expand = c(0, 0),
                              breaks = seq(0, 100, 10)) +
@@ -95,7 +109,7 @@ plot_ridges <- function(i, DataAll){
           scale_fill_gradientn(colours = fill_color[c(1:4, 7:10)],
                                breaks = seq(0, 100, 10),
                                limits = c(0, 100))+
-          labs(title = paste(LETTERS[i], country_names[i], sep = ': '),
+          labs(title = paste(LETTERS[i+1], country_names[i], sep = ': '),
                x = 'Age',
                y = 'Year',
                fill = "Age") +
@@ -155,7 +169,7 @@ fig_1 <- ggplot(data = DataYear) +
            legend.title = element_text(face = "bold", size = 12),
            plot.title.position = 'plot',
            legend.position = "bottom") +
-     labs(title = 'I',
+     labs(title = 'A',
           color = 'Country',
           x = "Year",
           y = "Median age")+
@@ -164,13 +178,12 @@ fig_1 <- ggplot(data = DataYear) +
 # save --------------------------------------------------------------------
 
 design <- "
-ABCDE
-FGHII
+AABCD
+EFGHI
 "
 
-fig <- fig_min[[1]] + fig_min[[2]] + fig_min[[3]] + fig_min[[4]] + fig_min[[5]] + 
+fig <- fig_1 + fig_min[[1]] + fig_min[[2]] + fig_min[[3]] + fig_min[[4]] + fig_min[[5]] + 
      fig_min[[6]] + fig_min[[7]] + fig_min[[8]] + 
-     fig_1 + 
      plot_layout(design = design, heights = c(1, 1, 1), guides = 'collect') &
      theme(legend.position = 'bottom',
            legend.title.position = 'top',
