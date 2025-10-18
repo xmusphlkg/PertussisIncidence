@@ -11,18 +11,29 @@ library(ggridges)
 library(paletteer)
 library(grid)
 library(gtable)
-library(sf)
+
+rm(list = ls())
 
 fill_color <- c("#E76254FF", "#EF8A47FF", "#F7AA58FF", "#FFD06FFF", "#FFE6B7FF", "#AADCE0FF", "#72BCD5FF", "#528FADFF", "#376795FF", "#1E466EFF")
 
-country_names <- c('US', 'GB', 'SE', 'CN', 'JP',
-                   'SG', 'AU', 'NZ')
+country_names <- c('US', 'GB',
+                   'JP', 'SG',
+                   'SE', 'CN',
+                   'AU', 'NZ')
 
-DataAge <- read.csv('./Data/Patients age.csv') |> 
-     filter(name != 'Unknow')
-names(DataAge) <- c('Year', 'Age', 'Incidence', 'Country')
+DataAge <- lapply(country_names, function(x){
+     read.xlsx('./Data/Pertussis case year age.xlsx', sheet = x) |> 
+          mutate(Country = x) |> 
+          pivot_longer(cols = -c(Year, Country), names_to = 'Age', values_to = 'Incidence')
+     }) |> 
+     bind_rows() |>
+     filter(Age != 'Unknow', !is.na(Incidence)) |> 
+     mutate(Incidence = round(Incidence))
+
 
 # figure --------------------------------------------------------------------
+
+i <- 6
 
 data_clean <- function(i){
      data <- DataAge |> 
@@ -61,7 +72,7 @@ data_clean <- function(i){
      return(data)
 }
 
-plot_ridges <- function(i){
+plot_ridges <- function(i, DataAll){
      data <- DataAll |> 
           filter(country == country_names[i])
      
@@ -78,13 +89,13 @@ plot_ridges <- function(i){
           scale_x_continuous(limits = c(0, 100),
                              expand = c(0, 0),
                              breaks = seq(0, 100, 10)) +
-          scale_y_continuous(breaks = seq(2015, 2023, 2),
+          scale_y_continuous(breaks = seq(2015, 2024, 2),
                              limits = c(2015, NA),
                              expand = expansion(mult = c(0, 0.04)))+
           scale_fill_gradientn(colours = fill_color[c(1:4, 7:10)],
                                breaks = seq(0, 100, 10),
                                limits = c(0, 100))+
-          labs(title = LETTERS[i],
+          labs(title = paste(LETTERS[i], country_names[i], sep = ': '),
                x = 'Age',
                y = 'Year',
                fill = "Age") +
@@ -108,11 +119,11 @@ plot_ridges <- function(i){
 
 DataAll <- bind_rows(map(1:length(country_names), data_clean))
 
-fig_min <- map(1:length(country_names), plot_ridges)
+fig_min <- map(1:length(country_names), plot_ridges, DataAll = DataAll)
 
 # line --------------------------------------------------------------------
 
-fill_color <- paletteer_d("ggsci::nrc_npg")
+fill_color <- paletteer_d("ggsci::default_nejm")
 
 DataYear <- DataAll |> 
      group_by(country, Year) |>
@@ -129,8 +140,8 @@ fig_1 <- ggplot(data = DataYear) +
      scale_y_continuous(trans = 'log10',
                         breaks = c(1, 5, 10, 20, 40, 60),
                         limits = c(1, 60)) +
-     scale_x_continuous(breaks = seq(2015, 2023, 2),
-                        limits = c(2015, 2023)) +
+     scale_x_continuous(breaks = seq(2015, 2024, 2),
+                        limits = c(2015, 2024)) +
      theme_bw()+
      theme(panel.grid.major.x = element_blank(),
            plot.background = element_blank(),
@@ -148,7 +159,7 @@ fig_1 <- ggplot(data = DataYear) +
           color = 'Country',
           x = "Year",
           y = "Median age")+
-     guides(color = guide_legend(nrow = 2, byrow = T))
+     guides(color = guide_legend(nrow = 1, byrow = T))
 
 # save --------------------------------------------------------------------
 
@@ -161,12 +172,14 @@ fig <- fig_min[[1]] + fig_min[[2]] + fig_min[[3]] + fig_min[[4]] + fig_min[[5]] 
      fig_min[[6]] + fig_min[[7]] + fig_min[[8]] + 
      fig_1 + 
      plot_layout(design = design, heights = c(1, 1, 1), guides = 'collect') &
-     theme(legend.position = 'bottom')
+     theme(legend.position = 'bottom',
+           legend.title.position = 'top',
+           axis.text = element_text(size = 12, color = "black"))
 
 ggsave("./Outcome/Fig 4.pdf",
        fig,
-       width = 12,
-       height = 6,
+       width = 14,
+       height = 7,
        device = cairo_pdf,
        family = "Times New Roman")
 

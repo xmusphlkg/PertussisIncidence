@@ -11,16 +11,20 @@ library(lmerTest)
 library(emmeans)
 library(ggpubr)
 
+rm(list = ls())
+
 # data --------------------------------------------------------------------
 
-fill_color <- paletteer_d("ggsci::nrc_npg")
+fill_color <- paletteer_d("ggsci::default_nejm")
 
 # Load data
 df_clean <- read.csv('./Outcome/Table S1.csv') |> 
      mutate(Date = as.Date(Date))
 
-country_list <- c('US', 'GB', 'SE', 'CN', 'JP',
-                  'SG', 'AU', 'NZ')
+country_list <- c('US', 'GB',
+                  'JP', 'SG',
+                  'SE', 'CN',
+                  'AU', 'NZ')
 
 # fig ----------------------------------------------------------------------
 
@@ -29,12 +33,14 @@ i <- 3
 plot_compare <- function(i){
      data <- df_clean |> 
           filter(Country == country_list[i]) |> 
-          mutate(stage = ifelse(Date < as.Date('2020-01-01'), '2015 Jan to 2019 Dec',
-                                ifelse(Date < as.Date('2024-01-01'), '2020 Jan to 2023 Dec',
-                                       '2024 Jan onwards')),
-                 AnnualizedInci = case_when(all(is.na(Month)) ~ Incidence * 52.14,
-                                            all(!is.na(Month)) ~ Incidence * 12)) |> 
-          select(stage, AnnualizedInci, Week, Month, Year)
+          mutate(stage = case_when(Year < 2020 ~ '2015 to 2019',
+                                   Year %in% 2020:2023 ~ '2020 to 2023',
+                                   TRUE ~ as.character(Year)),
+                 stage = factor(stage,
+                                levels = c('2015 to 2019',
+                                           '2020 to 2023',
+                                           '2024', '2025'))) |> 
+          select(stage, Incidence, Week, Month, Year)
      
      if (!all(is.na(data$Month))){
           xaxis_values <- 1:12
@@ -56,15 +62,15 @@ plot_compare <- function(i){
                       xaxis = as.integer(as.character(xaxis)))
      }
      
-     plot_breaks <- pretty(c(0, data$AnnualizedInci))
+     plot_breaks <- pretty(c(0, data$Incidence))
      plot_range <- range(plot_breaks)
      
-     data_2023 <- data |> 
-          filter(stage == '2024 Jan onwards')
-     data_2022 <- data |> 
-          filter(stage != '2024 Jan onwards')
+     data_stage3_4 <- data |> 
+          filter(stage %in% c('2024', '2025'))
+     data_stage_1_2 <- data |> 
+          filter(!stage %in% c('2024', '2025'))
 
-     results <- lmer(AnnualizedInci ~ stage + (1|xaxis), data = data)
+     results <- lmer(Incidence ~ stage + (1|xaxis), data = data)
      emm <- emmeans(results, ~ stage)
      pairs <- pairs(emm)
      pairs_summary <- summary(pairs, adjust = "bonferroni") |> 
@@ -72,16 +78,18 @@ plot_compare <- function(i){
           separate(contrast, c('stage1', 'stage2'), sep = ' \\- ') |> 
           rename('group1' = 'stage1',
                  'group2' = 'stage2') |> 
+          filter(group1 == '2015 to 2019') |>
           mutate(y.position = plot_range[2] * c(0.7, 0.8, 0.9),
                  p.value = ifelse(p.value < 0.001, '***', format(round(p.value, 3), nsmall = 3)))
      
-     fig1_1 <- ggplot(data_2022, aes(x = xaxis, y = AnnualizedInci)) +
+     fig1_1 <- ggplot(data_2022, aes(x = xaxis, y = Incidence)) +
           geom_point(aes(group = Year, color = stage),
                      alpha = 0.5) +
           geom_path(aes(group = Year, color = stage),
                     alpha = 0.5) +
           geom_smooth(aes(color = stage, fill = stage),
                       method = 'gam',
+                      formula = y ~ s(x, bs = 'cs'),
                       show.legend = F,
                       linewidth = 1,
                       se = T) +
@@ -93,7 +101,7 @@ plot_compare <- function(i){
           scale_y_continuous(expand = c(0, 0),
                              breaks = plot_breaks) +
           coord_cartesian(ylim = plot_range) +
-          labs(title = paste0(LETTERS[2*i-1]),
+          labs(title = paste(LETTERS[i], country_list[i], sep = ': '),
                x = ifelse(all(is.na(data$Month)), 'Epidemiological week', 'Month'),
                y = 'Annualized incidence rate',
                color = 'Stage', fill = 'Stage') +
@@ -126,7 +134,7 @@ plot_compare <- function(i){
           scale_y_continuous(expand = expansion(mult = c(0, 0)),
                              breaks = plot_breaks,
                              limits = plot_range) +
-          labs(title = LETTERS[2*i], x = NULL, y = NULL) +
+          labs(x = NULL, y = NULL) +
           scale_color_manual(values = fill_color) +
           theme_bw() +
           theme(plot.title.position = "plot",

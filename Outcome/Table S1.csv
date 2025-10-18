@@ -116,6 +116,18 @@
 2024-07-01,2024,7,NA,"Pertussis",74964,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1828699266119217152.html","CN",14251.787825,"China",5.25997165552105
 2024-08-01,2024,8,NA,"Pertussis",43216,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1834433420274282496.html","CN",14251.787825,"China",3.03232131509788
 2024-09-01,2024,9,NA,"Pertussis",17316,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1848255166500679680.html","CN",14251.787825,"China",1.21500545844675
+2024-10-01,2024,10,NA,"Pertussis",10118,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1859039988831596544.html","CN",14251.787825,"China",0.709946016895603
+2024-11-01,2024,11,NA,"Pertussis",7829,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1868944491533684736.html","CN",14251.787825,"China",0.549334588483463
+2024-12-01,2024,12,NA,"Pertussis",6662,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1879707944644890624.html","CN",14251.787825,"China",0.467450124981074
+2025-01-01,2025,1,NA,"Pertussis",5611,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1890318316888248320.html","CN",14251.787825,"China",0.39370499118415
+2025-02-01,2025,2,NA,"Pertussis",4298,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1904362252617027584.html","CN",14251.787825,"China",0.301576198914539
+2025-03-01,2025,3,NA,"Pertussis",4186,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1914222311882788864.html","CN",14251.787825,"China",0.293717535750642
+2025-04-01,2025,4,NA,"Pertussis",4506,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1925457919569465344.html","CN",14251.787825,"China",0.316170859076061
+2025-05-01,2025,5,NA,"Pertussis",4260,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1930458943493410816.html","CN",14251.787825,"China",0.298909866769645
+2025-06-01,2025,6,NA,"Pertussis",3590,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1941024811541499904.html","CN",14251.787825,"China",0.251898221057048
+2025-07-01,2025,7,NA,"Pertussis",2974,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1952913634768621568.html","CN",14251.787825,"China",0.208675573655616
+2025-08-01,2025,8,NA,"Pertussis",1774,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1963855822880935936.html","CN",14251.787825,"China",0.124475611185294
+2025-09-01,2025,9,NA,"Pertussis",1028,"https://www.ndcpa.gov.cn/jbkzzx/c100016/common/content/content_1976561324014342144.html","CN",14251.787825,"China",0.0721313011829097
 2015-01-01,2015,1,NA,"pertussis",1487,"https://nindss.health.gov.au/pbi-dashboard/","AU",238.202365,"Australia",6.24259125219013
 2015-02-01,2015,2,NA,"pertussis",1240,"https://nindss.health.gov.au/pbi-dashboard/","AU",238.202365,"Australia",5.20565780276783
 2015-03-01,2015,3,NA,"pertussis",1360,"https://nindss.health.gov.au/pbi-dashboard/","AU",238.202365,"Australia",5.70943113851955
@@ -233,6 +245,18 @@
 2024-07-01,2024,7,NA,"Pertussis",5233,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",19.5996311838559
 2024-08-01,2024,8,NA,"Pertussis",6661,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",24.9480495539202
 2024-09-01,2024,9,NA,"Pertussis",8312,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",31.1316901204301
+2024-10-01,2024,10,NA,"Pertussis",7940,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",29.7384046626822
+2024-11-01,2024,11,NA,"Pertussis",9308,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",34.8620995718194
+2024-12-01,2024,12,NA,"Pertussis",6843,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",25.6297107187323
+2025-01-01,2025,1,NA,"Pertussis",5010,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",18.7644089874103
+2025-02-01,2025,2,NA,"Pertussis",2881,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",10.7904715155148
+2025-03-01,2025,3,NA,"Pertussis",2362,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",8.84661357849564
+2025-04-01,2025,4,NA,"Pertussis",1929,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",7.22485926880529
+2025-05-01,2025,5,NA,"Pertussis",2008,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",7.52074515902593
+2025-06-01,2025,6,NA,"Pertussis",1756,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",6.57690662313224
+2025-07-01,2025,7,NA,"Pertussis",1572,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",5.88775467628923
+2025-08-01,2025,8,NA,"Pertussis",1692,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",6.33720159814336
+2025-09-01,2025,9,NA,"Pertussis",1710,"https://nindss.health.gov.au/pbi-dashboard/","AU",266.99482,"Australia",6.40461863642149
 2014-12-29,2015,NA,1,"Pertussis",10,"https://www.niid.go.jp/niid/en/survaillance-data-table-english.html","JP",1272.50933,"Japan",0.00785848855033542
 2015-01-05,2015,NA,2,"Pertussis",26,"https://www.niid.go.jp/niid/en/survaillance-data-table-english.html","JP",1272.50933,"Japan",0.0204320702308721
 2015-01-12,2015,NA,3,"Pertussis",23,"https://www.niid.go.jp/niid/en/survaillance-data-table-english.html","JP",1272.50933,"Japan",0.0180745236657715
@@ -742,8 +766,59 @@
 2024-09-09,2024,NA,37,"Pertussis",103,"https://www.niid.go.jp/niid/en/survaillance-data-table-english.html","JP",1226.31432,"Japan",0.0839915169546418
 2024-09-16,2024,NA,38,"Pertussis",105,"https://www.niid.go.jp/niid/en/survaillance-data-table-english.html","JP",1226.31432,"Japan",0.0856224201964795
 2024-09-23,2024,NA,39,"Pertussis",93,"https://www.niid.go.jp/niid/en/survaillance-data-table-english.html","JP",1226.31432,"Japan",0.0758370007454533
-2024-09-30,2024,NA,40,"Pertussis",133,"https://www.niid.go.jp/niid/en/survaillance-data-table-english.html","JP",1226.31432,"Japan",0.108455065582207
-2024-10-07,2024,NA,41,"Pertussis",139,"https://www.niid.go.jp/niid/en/survaillance-data-table-english.html","JP",1226.31432,"Japan",0.11334777530772
+2024-09-30,2024,NA,40,"Pertussis",133,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.108455065582207
+2024-10-07,2024,NA,41,"Pertussis",139,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.11334777530772
+2024-10-14,2024,NA,42,"Pertussis",122,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.0994850977521
+2024-10-21,2024,NA,43,"Pertussis",147,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.119871388275071
+2024-10-28,2024,NA,44,"Pertussis",120,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.0978541945102623
+2024-11-04,2024,NA,45,"Pertussis",109,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.0888842266801549
+2024-11-11,2024,NA,46,"Pertussis",144,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.117425033412315
+2024-11-18,2024,NA,47,"Pertussis",127,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.103562355856694
+2024-11-25,2024,NA,48,"Pertussis",139,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.11334777530772
+2024-12-02,2024,NA,49,"Pertussis",135,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.110085968824045
+2024-12-09,2024,NA,50,"Pertussis",131,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.10682416234037
+2024-12-16,2024,NA,51,"Pertussis",144,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.117425033412315
+2024-12-23,2024,NA,52,"Pertussis",158,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.128841356105179
+2024-12-30,2025,NA,1,"Pertussis",25,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2024/","JP",1226.31432,"Japan",0.0203862905229713
+2025-01-06,2025,NA,2,"Pertussis",135,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.110085968824045
+2025-01-13,2025,NA,3,"Pertussis",140,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.114163226928639
+2025-01-20,2025,NA,4,"Pertussis",195,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.159013066079176
+2025-01-27,2025,NA,5,"Pertussis",246,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.200601098746038
+2025-02-03,2025,NA,6,"Pertussis",262,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.213648324680739
+2025-02-10,2025,NA,7,"Pertussis",280,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.228326453857279
+2025-02-17,2025,NA,8,"Pertussis",358,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.291931680288949
+2025-02-24,2025,NA,9,"Pertussis",353,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.287854422184355
+2025-03-03,2025,NA,10,"Pertussis",482,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.393047681282887
+2025-03-10,2025,NA,11,"Pertussis",561,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.457468359335476
+2025-03-17,2025,NA,12,"Pertussis",458,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.373476842380834
+2025-03-24,2025,NA,13,"Pertussis",578,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.471331036891097
+2025-03-31,2025,NA,14,"Pertussis",722,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.588756070303411
+2025-04-07,2025,NA,15,"Pertussis",1222,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.996481880762837
+2025-04-14,2025,NA,16,"Pertussis",1884,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.53631085381112
+2025-04-21,2025,NA,17,"Pertussis",2176,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.77442272711942
+2025-04-28,2025,NA,18,"Pertussis",1746,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.42377853012432
+2025-05-05,2025,NA,19,"Pertussis",1792,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.46128930468658
+2025-05-12,2025,NA,20,"Pertussis",2299,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.87472327649244
+2025-05-19,2025,NA,21,"Pertussis",2660,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.16910131164415
+2025-05-26,2025,NA,22,"Pertussis",2329,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.89918682512001
+2025-06-02,2025,NA,23,"Pertussis",3044,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.48223473407699
+2025-06-09,2025,NA,24,"Pertussis",2970,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.42189131412899
+2025-06-16,2025,NA,25,"Pertussis",3211,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.61841515477043
+2025-06-23,2025,NA,26,"Pertussis",3353,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.73420928494091
+2025-06-30,2025,NA,27,"Pertussis",3578,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.91768589964765
+2025-07-07,2025,NA,28,"Pertussis",3682,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",3.00249286822321
+2025-07-14,2025,NA,29,"Pertussis",3908,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",3.18678493455087
+2025-07-21,2025,NA,30,"Pertussis",3399,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.77172005950318
+2025-07-28,2025,NA,31,"Pertussis",3599,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.93481038368695
+2025-08-04,2025,NA,32,"Pertussis",3211,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.61841515477043
+2025-08-11,2025,NA,33,"Pertussis",1506,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.22807014110379
+2025-08-18,2025,NA,34,"Pertussis",2762,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",2.25227737697787
+2025-08-25,2025,NA,35,"Pertussis",2258,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.84128976003477
+2025-09-01,2025,NA,36,"Pertussis",1921,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.56648256378512
+2025-09-08,2025,NA,37,"Pertussis",1552,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",1.26558091566606
+2025-09-15,2025,NA,38,"Pertussis",1168,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.952447493233219
+2025-09-22,2025,NA,39,"Pertussis",1001,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.816267072539771
+2025-09-29,2025,NA,40,"Pertussis",1193,"https://id-info.jihs.go.jp/surveillance/idwr/rapid/2025/","JP",1226.31432,"Japan",0.972833783756191
 2015-01-01,2015,1,NA,"Pertussis",63,"https://www.esr.cri.nz/digital-library/monthly-notifiable-disease-surveillance-reports-for-2015/","NZ",45.9059,"New Zealand",1.3723726144134
 2015-02-01,2015,2,NA,"Pertussis",73,"https://www.esr.cri.nz/digital-library/monthly-notifiable-disease-surveillance-reports-for-2015/","NZ",45.9059,"New Zealand",1.59020953733616
 2015-03-01,2015,3,NA,"Pertussis",81,"https://www.esr.cri.nz/digital-library/monthly-notifiable-disease-surveillance-reports-for-2015/","NZ",45.9059,"New Zealand",1.76447907567437
@@ -861,6 +936,18 @@
 2024-07-01,2024,7,NA,"Pertussis",72,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",1.36623985270416
 2024-08-01,2024,8,NA,"Pertussis",75,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",1.4231665132335
 2024-09-01,2024,9,NA,"Pertussis",189,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",3.58637961334843
+2024-10-01,2024,10,NA,"Pertussis",192,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",3.64330627387777
+2024-11-01,2024,11,NA,"Pertussis",421,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",7.9887080276174
+2024-12-01,2024,12,NA,"Pertussis",582,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",11.043772142692
+2025-01-01,2025,1,NA,"Pertussis",455,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",8.63387684694992
+2025-02-01,2025,2,NA,"Pertussis",345,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",6.54656596087412
+2025-03-01,2025,3,NA,"Pertussis",212,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",4.02281734407337
+2025-04-01,2025,4,NA,"Pertussis",159,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",3.01711300805503
+2025-05-01,2025,5,NA,"Pertussis",180,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",3.41559963176041
+2025-06-01,2025,6,NA,"Pertussis",189,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",3.58637961334843
+2025-07-01,2025,7,NA,"Pertussis",149,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",2.82735747295723
+2025-08-01,2025,8,NA,"Pertussis",205,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",3.88998846950491
+2025-09-01,2025,9,NA,"Pertussis",155,"https://www.esr.cri.nz/digital-library/pertussis-dashboard/","NZ",52.699385,"New Zealand",2.94121079401591
 2014-12-29,2015,NA,1,"pertussis",54,"https://assets.publishing.service.gov.uk/media/5a815019e5274a2e87dbcf0f/WN1505.pdf","GB",652.24364,"United Kingdom",0.0827911484119646
 2015-01-05,2015,NA,2,"pertussis",44,"https://assets.publishing.service.gov.uk/media/5a815019e5274a2e87dbcf0f/WN1505.pdf","GB",652.24364,"United Kingdom",0.0674594542616008
 2015-01-12,2015,NA,3,"pertussis",49,"https://assets.publishing.service.gov.uk/media/5a815019e5274a2e87dbcf0f/WN1505.pdf","GB",652.24364,"United Kingdom",0.0751253013367827
@@ -1356,6 +1443,46 @@
 2024-06-03,2024,NA,23,"pertussis",1230,"https://assets.publishing.service.gov.uk/media/667d98465b0d63b556a4b467/NOIDS-weekly-report-2024-week-25.pdf","GB",679.614395,"United Kingdom",1.80984983403714
 2024-06-10,2024,NA,24,"pertussis",1259,"https://assets.publishing.service.gov.uk/media/667d98465b0d63b556a4b467/NOIDS-weekly-report-2024-week-25.pdf","GB",679.614395,"United Kingdom",1.85252109028679
 2024-06-17,2024,NA,25,"pertussis",974,"https://assets.publishing.service.gov.uk/media/667d98465b0d63b556a4b467/NOIDS-weekly-report-2024-week-25.pdf","GB",679.614395,"United Kingdom",1.43316564093673
+2024-06-24,2024,NA,26,"pertussis",1018,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",1.49790823662586
+2024-07-01,2024,NA,27,"pertussis",927,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",1.3640087773597
+2024-07-08,2024,NA,28,"pertussis",826,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",1.21539509180055
+2024-07-15,2024,NA,29,"pertussis",581,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.854896547622421
+2024-07-22,2024,NA,30,"pertussis",672,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.988796006888583
+2024-07-29,2024,NA,31,"pertussis",497,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.731297046761348
+2024-08-05,2024,NA,32,"pertussis",357,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.52529787865956
+2024-08-12,2024,NA,33,"pertussis",488,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.718054243097661
+2024-08-19,2024,NA,34,"pertussis",248,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.364912812066025
+2024-08-26,2024,NA,35,"pertussis",239,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.351670008402338
+2024-09-02,2024,NA,36,"pertussis",292,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.429655407755158
+2024-09-09,2024,NA,37,"pertussis",224,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.329598668962861
+2024-09-16,2024,NA,38,"pertussis",309,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.454669592453232
+2024-09-23,2024,NA,39,"pertussis",361,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.531183569176754
+2024-09-30,2024,NA,40,"pertussis",264,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.3884555741348
+2024-10-07,2024,NA,41,"pertussis",233,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.342841472626547
+2024-10-14,2024,NA,42,"pertussis",323,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.475269509263411
+2024-10-21,2024,NA,43,"pertussis",288,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.423769717237964
+2024-10-28,2024,NA,44,"pertussis",233,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.342841472626547
+2024-11-04,2024,NA,45,"pertussis",262,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.385512728876203
+2024-11-11,2024,NA,46,"pertussis",142,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.208942013360385
+2024-11-18,2024,NA,47,"pertussis",253,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.372269925212517
+2024-11-25,2024,NA,48,"pertussis",235,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.345784317885144
+2024-12-02,2024,NA,49,"pertussis",210,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.308998752152682
+2024-12-09,2024,NA,50,"pertussis",205,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.30164163900619
+2024-12-16,2024,NA,51,"pertussis",171,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.251613269610041
+2024-12-23,2024,NA,52,"pertussis",114,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.167742179740027
+2024-12-30,2024,NA,1,"pertussis",118,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.173627870257221
+2025-01-06,2025,NA,2,"pertussis",122,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.179513560774415
+2025-01-13,2025,NA,3,"pertussis",121,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.178042138145117
+2025-01-20,2025,NA,4,"pertussis",144,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.211884858618982
+2025-01-27,2025,NA,5,"pertussis",74,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.108885274568088
+2025-02-03,2025,NA,6,"pertussis",105,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.154499376076341
+2025-02-10,2025,NA,7,"pertussis",104,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.153027953447043
+2025-02-17,2025,NA,8,"pertussis",107,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.157442221334938
+2025-02-24,2025,NA,9,"pertussis",84,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.123599500861073
+2025-03-03,2025,NA,10,"pertussis",94,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.138313727154058
+2025-03-10,2025,NA,11,"pertussis",68,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.100056738792297
+2025-03-17,2025,NA,12,"pertussis",51,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.0750425540942228
+2025-03-24,2025,NA,13,"pertussis",66,"https://www.gov.uk/government/publications/notifiable-diseases-last-52-weeks","GB",679.614395,"United Kingdom",0.0971138935337001
 2015-01-04,2015,NA,1,"Pertussis",153,"https://wonder.cdc.gov/nndss/nndss_weekly_tables_2015.asp?mmwr_year=2015&mmwr_week=01&mmwr_table=2I&request=Submit","US",3246.077765,"United States",0.0471338061120048
 2015-01-11,2015,NA,2,"Pertussis",161,"https://wonder.cdc.gov/nndss/nndss_weekly_tables_2015.asp?mmwr_year=2015&mmwr_week=02&mmwr_table=2I&request=Submit","US",3246.077765,"United States",0.0495983188498874
 2015-01-18,2015,NA,3,"Pertussis",129,"https://wonder.cdc.gov/nndss/nndss_weekly_tables_2015.asp?mmwr_year=2015&mmwr_week=03&mmwr_table=2I&request=Submit","US",3246.077765,"United States",0.039740267898357
@@ -1861,12 +1988,60 @@
 2024-08-18,2024,NA,34,"Pertussis",250,"https://wonder.cdc.gov/nndss/static/2024/34/2024-34-table990.html","US",3418.1442,"United States",0.0731391027915089
 2024-08-25,2024,NA,35,"Pertussis",251,"https://wonder.cdc.gov/nndss/static/2024/35/2024-35-table990.html","US",3418.1442,"United States",0.0734316592026749
 2024-09-01,2024,NA,36,"Pertussis",234,"https://wonder.cdc.gov/nndss/static/2024/36/2024-36-table990.html","US",3418.1442,"United States",0.0684582002128523
-2024-09-08,2024,NA,37,"Pertussis",291,"https://wonder.cdc.gov/nndss/static/2024/37/2024-37-table990.html","US",3418.1442,"United States",0.0851339156493164
-2024-09-15,2024,NA,38,"Pertussis",291,"https://wonder.cdc.gov/nndss/static/2024/38/2024-38-table990.html","US",3418.1442,"United States",0.0851339156493164
-2024-09-22,2024,NA,39,"Pertussis",289,"https://wonder.cdc.gov/nndss/static/2024/39/2024-39-table990.html","US",3418.1442,"United States",0.0845488028269843
-2024-09-29,2024,NA,40,"Pertussis",302,"https://wonder.cdc.gov/nndss/static/2024/40/2024-40-table990.html","US",3418.1442,"United States",0.0883520361721428
-2024-10-06,2024,NA,41,"Pertussis",246,"https://wonder.cdc.gov/nndss/static/2024/41/2024-41-table990.html","US",3418.1442,"United States",0.0719688771468448
-2024-10-13,2024,NA,42,"Pertussis",348,"https://wonder.cdc.gov/nndss/static/2024/42/2024-42-table990.html","US",3418.1442,"United States",0.10180963108578
+2024-09-08,2024,NA,37,"Pertussis",292,"https://wonder.cdc.gov/nndss/static/2024/37/2024-37-table990.html","US",3418.1442,"United States",0.0854264720604824
+2024-09-15,2024,NA,38,"Pertussis",292,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0854264720604824
+2024-09-22,2024,NA,39,"Pertussis",289,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0845488028269843
+2024-09-29,2024,NA,40,"Pertussis",302,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0883520361721428
+2024-10-06,2024,NA,41,"Pertussis",246,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0719688771468448
+2024-10-13,2024,NA,42,"Pertussis",348,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.10180963108578
+2024-10-20,2024,NA,43,"Pertussis",462,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.135161061958708
+2024-10-27,2024,NA,44,"Pertussis",497,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.14540053634952
+2024-11-03,2024,NA,45,"Pertussis",389,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.113804443943588
+2024-11-10,2024,NA,46,"Pertussis",434,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.126969482446059
+2024-11-17,2024,NA,47,"Pertussis",577,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.168805049242803
+2024-11-24,2024,NA,48,"Pertussis",364,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.106490533664437
+2024-12-01,2024,NA,49,"Pertussis",533,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.155932567151497
+2024-12-08,2024,NA,50,"Pertussis",509,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.148911213283512
+2024-12-15,2024,NA,51,"Pertussis",424,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.124043918334399
+2024-12-22,2024,NA,52,"Pertussis",212,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0620219591671996
+2024-12-29,2025,NA,1,"Pertussis",133,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0389100026850827
+2025-01-05,2025,NA,2,"Pertussis",233,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0681656438016863
+2025-01-12,2025,NA,3,"Pertussis",235,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0687507566240184
+2025-01-19,2025,NA,4,"Pertussis",283,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0827934643599881
+2025-01-26,2025,NA,5,"Pertussis",360,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.105320308019773
+2025-02-02,2025,NA,6,"Pertussis",290,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0848413592381503
+2025-02-09,2025,NA,7,"Pertussis",207,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0605591771113694
+2025-02-16,2025,NA,8,"Pertussis",223,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0652400796900259
+2025-02-23,2025,NA,9,"Pertussis",228,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0667028617458561
+2025-03-02,2025,NA,10,"Pertussis",186,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0544154924768826
+2025-03-09,2025,NA,11,"Pertussis",158,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0462239129642336
+2025-03-16,2025,NA,12,"Pertussis",138,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0403727847409129
+2025-03-23,2025,NA,13,"Pertussis",195,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0570485001773769
+2025-03-30,2025,NA,14,"Pertussis",168,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.049149477075894
+2025-04-06,2025,NA,15,"Pertussis",185,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0541229360657166
+2025-04-13,2025,NA,16,"Pertussis",140,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.040957897563245
+2025-04-20,2025,NA,17,"Pertussis",176,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0514899283652223
+2025-04-27,2025,NA,18,"Pertussis",156,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0456388001419016
+2025-05-04,2025,NA,19,"Pertussis",259,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0757721104920032
+2025-05-11,2025,NA,20,"Pertussis",205,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0599740642890373
+2025-05-18,2025,NA,21,"Pertussis",152,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0444685744972374
+2025-05-25,2025,NA,22,"Pertussis",194,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0567559437662109
+2025-06-01,2025,NA,23,"Pertussis",154,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0450536873195695
+2025-06-08,2025,NA,24,"Pertussis",197,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.057633612999709
+2025-06-15,2025,NA,25,"Pertussis",170,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0497345898982261
+2025-06-22,2025,NA,26,"Pertussis",140,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.040957897563245
+2025-06-29,2025,NA,27,"Pertussis",166,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0485643642535619
+2025-07-06,2025,NA,28,"Pertussis",215,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0628996284006977
+2025-07-13,2025,NA,29,"Pertussis",170,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0497345898982261
+2025-07-20,2025,NA,30,"Pertussis",184,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0538303796545506
+2025-07-27,2025,NA,31,"Pertussis",172,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0503197027205581
+2025-08-03,2025,NA,32,"Pertussis",176,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0514899283652223
+2025-08-10,2025,NA,33,"Pertussis",164,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0479792514312298
+2025-08-17,2025,NA,34,"Pertussis",184,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0538303796545506
+2025-08-24,2025,NA,35,"Pertussis",157,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0459313565530676
+2025-08-31,2025,NA,36,"Pertussis",110,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0321812052282639
+2025-09-07,2025,NA,37,"Pertussis",142,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0415430103855771
+2025-09-14,2025,NA,38,"Pertussis",105,"https://data.cdc.gov/NNDSS/NNDSS-Weekly-Data/x9gk-5huc/about_data","US",3418.1442,"United States",0.0307184231724337
 2015-01-04,2015,NA,1,"Pertussis",2,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2015/weekly-infectious-diseases-bulletin","SG",56.50018,"Singapore",0.0353981173157324
 2015-01-11,2015,NA,2,"Pertussis",2,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2015/weekly-infectious-diseases-bulletin","SG",56.50018,"Singapore",0.0353981173157324
 2015-01-18,2015,NA,3,"Pertussis",1,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2015/weekly-infectious-diseases-bulletin","SG",56.50018,"Singapore",0.0176990586578662
@@ -2378,6 +2553,56 @@
 2024-09-29,2024,NA,40,"Pertussis",3,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0495645793012204
 2024-10-06,2024,NA,41,"Pertussis",1,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0165215264337401
 2024-10-13,2024,NA,42,"Pertussis",2,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0330430528674803
+2024-10-20,2024,NA,43,"Pertussis",1,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0165215264337401
+2024-10-27,2024,NA,44,"Pertussis",1,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0165215264337401
+2024-11-03,2024,NA,45,"Pertussis",1,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0165215264337401
+2024-11-10,2024,NA,46,"Pertussis",5,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0826076321687006
+2024-11-17,2024,NA,47,"Pertussis",4,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0660861057349605
+2024-11-24,2024,NA,48,"Pertussis",3,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0495645793012204
+2024-12-01,2024,NA,49,"Pertussis",7,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.115650685036181
+2024-12-08,2024,NA,50,"Pertussis",6,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0991291586024408
+2024-12-15,2024,NA,51,"Pertussis",3,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0495645793012204
+2024-12-22,2024,NA,52,"Pertussis",6,"https://www.moh.gov.sg/resources-statistics/infectious-disease-statistics/2024/weekly-infectious-diseases-bulletin","SG",60.527095,"Singapore",0.0991291586024408
+2024-12-29,2025,NA,1,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-01-05,2025,NA,2,"Pertussis",4,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0660861057349605
+2025-01-12,2025,NA,3,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-01-19,2025,NA,4,"Pertussis",4,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0660861057349605
+2025-01-26,2025,NA,5,"Pertussis",1,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0165215264337401
+2025-02-02,2025,NA,6,"Pertussis",1,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0165215264337401
+2025-02-09,2025,NA,7,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-02-16,2025,NA,8,"Pertussis",2,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0330430528674803
+2025-02-23,2025,NA,9,"Pertussis",1,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0165215264337401
+2025-03-02,2025,NA,10,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-03-09,2025,NA,11,"Pertussis",2,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0330430528674803
+2025-03-16,2025,NA,12,"Pertussis",0,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0
+2025-03-23,2025,NA,13,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-03-30,2025,NA,14,"Pertussis",0,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0
+2025-04-06,2025,NA,15,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-04-13,2025,NA,16,"Pertussis",0,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0
+2025-04-20,2025,NA,17,"Pertussis",0,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0
+2025-04-27,2025,NA,18,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-05-04,2025,NA,19,"Pertussis",6,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0991291586024408
+2025-05-11,2025,NA,20,"Pertussis",0,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0
+2025-05-18,2025,NA,21,"Pertussis",2,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0330430528674803
+2025-05-25,2025,NA,22,"Pertussis",1,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0165215264337401
+2025-06-01,2025,NA,23,"Pertussis",2,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0330430528674803
+2025-06-08,2025,NA,24,"Pertussis",1,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0165215264337401
+2025-06-15,2025,NA,25,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-06-22,2025,NA,26,"Pertussis",2,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0330430528674803
+2025-06-29,2025,NA,27,"Pertussis",1,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0165215264337401
+2025-07-06,2025,NA,28,"Pertussis",2,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0330430528674803
+2025-07-13,2025,NA,29,"Pertussis",4,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0660861057349605
+2025-07-20,2025,NA,30,"Pertussis",2,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0330430528674803
+2025-07-27,2025,NA,31,"Pertussis",1,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0165215264337401
+2025-08-03,2025,NA,32,"Pertussis",5,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0826076321687006
+2025-08-10,2025,NA,33,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-08-17,2025,NA,34,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-08-24,2025,NA,35,"Pertussis",1,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0165215264337401
+2025-08-31,2025,NA,36,"Pertussis",2,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0330430528674803
+2025-09-07,2025,NA,37,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-09-14,2025,NA,38,"Pertussis",2,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0330430528674803
+2025-09-21,2025,NA,39,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
+2025-09-28,2025,NA,40,"Pertussis",3,"https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2025/","SG",60.527095,"Singapore",0.0495645793012204
 2015-01-01,2015,1,NA,"Pertussis",75,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",98.493485,"Sweden",0.761471685157653
 2015-02-01,2015,2,NA,"Pertussis",66,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",98.493485,"Sweden",0.670095082938734
 2015-03-01,2015,3,NA,"Pertussis",41,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",98.493485,"Sweden",0.416271187886184
@@ -2487,11 +2712,23 @@
 2023-11-01,2023,11,NA,"Pertussis",25,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.12086,"Sweden",0.235580450441129
 2023-12-01,2023,12,NA,"Pertussis",21,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.12086,"Sweden",0.197887578370548
 2024-01-01,2024,1,NA,"Pertussis",26,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",0.24359007930684
-2024-02-01,2024,2,NA,"Pertussis",30,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",0.281065476123277
+2024-02-01,2024,2,NA,"Pertussis",28,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",0.262327777715059
 2024-03-01,2024,3,NA,"Pertussis",46,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",0.430967063389025
 2024-04-01,2024,4,NA,"Pertussis",68,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",0.637081745879428
 2024-05-01,2024,5,NA,"Pertussis",100,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",0.936884920410923
-2024-06-01,2024,6,NA,"Pertussis",177,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",1.65828630912733
-2024-07-01,2024,7,NA,"Pertussis",293,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",2.74507281680401
-2024-08-01,2024,8,NA,"Pertussis",496,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",4.64694920523818
-2024-09-01,2024,9,NA,"Pertussis",417,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",3.90681011811355
+2024-06-01,2024,6,NA,"Pertussis",177,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",1.65828630912733
+2024-07-01,2024,7,NA,"Pertussis",292,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",2.7357039675999
+2024-08-01,2024,8,NA,"Pertussis",495,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",4.63758035603407
+2024-09-01,2024,9,NA,"Pertussis",415,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",3.88807241970533
+2024-10-01,2024,10,NA,"Pertussis",344,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",3.22288412621358
+2024-11-01,2024,11,NA,"Pertussis",324,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",3.03550714213139
+2024-12-01,2024,12,NA,"Pertussis",230,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2024&rid%5B%5D=112229","SE",106.736695,"Sweden",2.15483531694512
+2025-01-01,2025,1,NA,"Pertussis",166,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2025&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",1.55522896788213
+2025-02-01,2025,2,NA,"Pertussis",98,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2025&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",0.918147222002705
+2025-03-01,2025,3,NA,"Pertussis",74,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2025&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",0.693294841104083
+2025-04-01,2025,4,NA,"Pertussis",43,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2025&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",0.402860515776697
+2025-05-01,2025,5,NA,"Pertussis",36,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2025&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",0.337278571347932
+2025-06-01,2025,6,NA,"Pertussis",34,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2025&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",0.318540872939714
+2025-07-01,2025,7,NA,"Pertussis",55,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2025&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",0.515286706226008
+2025-08-01,2025,8,NA,"Pertussis",79,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2025&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",0.74013908712463
+2025-09-01,2025,9,NA,"Pertussis",45,"https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/kikhosta/?tab=tab-region&year%5B%5D=2025&rid%5B%5D=112229&scope%5B%5D=all","SE",106.736695,"Sweden",0.421598214184915
