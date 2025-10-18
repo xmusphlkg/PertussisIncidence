@@ -46,6 +46,7 @@ plot_compare <- function(i){
           xaxis_values <- 1:12
           xaxis_labels <- month.abb[xaxis_values]
           xaxis_breaks <- 101:112
+          labs_y <- 'Monthly incidence'
           data <- data |> 
                mutate(xaxis = factor(Month,
                                      levels = xaxis_values,
@@ -55,6 +56,7 @@ plot_compare <- function(i){
           xaxis_values <- 1:52
           xaxis_labels <- 1:52
           xaxis_breaks <- 201:252
+          labs_y <- 'Weekly incidence'
           data <- data |> 
                mutate(xaxis = factor(Week,
                                      levels = xaxis_values,
@@ -82,7 +84,7 @@ plot_compare <- function(i){
           mutate(y.position = plot_range[2] * c(0.7, 0.8, 0.9),
                  p.value = ifelse(p.value < 0.001, '***', format(round(p.value, 3), nsmall = 3)))
      
-     fig1_1 <- ggplot(data_2022, aes(x = xaxis, y = Incidence)) +
+     fig1_1 <- ggplot(data_stage_1_2, aes(x = xaxis, y = Incidence)) +
           geom_point(aes(group = Year, color = stage),
                      alpha = 0.5) +
           geom_path(aes(group = Year, color = stage),
@@ -93,7 +95,7 @@ plot_compare <- function(i){
                       show.legend = F,
                       linewidth = 1,
                       se = T) +
-          geom_path(data = data_2023, aes(color = stage),
+          geom_path(data = data_stage3_4, aes(color = stage),
                     linewidth = 1) +
           scale_x_continuous(breaks = xaxis_breaks[seq(1, length(xaxis_breaks), by = length(xaxis_breaks) /12)],
                              labels = xaxis_labels[seq(1, length(xaxis_breaks), by = length(xaxis_breaks) /12)],
@@ -103,7 +105,7 @@ plot_compare <- function(i){
           coord_cartesian(ylim = plot_range) +
           labs(title = paste(LETTERS[i], country_list[i], sep = ': '),
                x = ifelse(all(is.na(data$Month)), 'Epidemiological week', 'Month'),
-               y = 'Annualized incidence rate',
+               y = labs_y,
                color = 'Stage', fill = 'Stage') +
           scale_color_manual(values = fill_color) +
           scale_fill_manual(values = fill_color) +
@@ -125,7 +127,7 @@ plot_compare <- function(i){
           guides(fill = guide_legend(nrow = 1,
                                      title.position = 'left'))
      
-     fig1_2 <- ggplot(data, aes(x = stage, y = AnnualizedInci)) +
+     fig1_2 <- ggplot(data, aes(x = stage, y = Incidence)) +
           geom_boxplot(aes(color = stage),
                        show.legend = F)+
           stat_pvalue_manual(pairs_summary,
@@ -148,6 +150,7 @@ plot_compare <- function(i){
                 legend.background = element_rect(fill = "transparent", colour = "transparent"),
                 axis.title = element_text(face = "bold", size = 12, color = "black"),
                 axis.text = element_blank(),
+                axis.ticks.x = element_blank(),
                 plot.background = element_blank())
      
      return(fig1_1 + fig1_2 + plot_layout(widths = c(3, 1)))
