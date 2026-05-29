@@ -26,6 +26,11 @@ country_list <- c('US', 'GB',
                   'SE', 'CN',
                   'AU', 'NZ')
 
+recent_years <- sort(unique(df_clean$Year[df_clean$Year >= 2024]))
+stage_levels <- c('2015 to 2019',
+                  '2020 to 2023',
+                  as.character(recent_years))
+
 # fig ----------------------------------------------------------------------
 
 i <- 3
@@ -37,9 +42,7 @@ plot_compare <- function(i){
                                    Year %in% 2020:2023 ~ '2020 to 2023',
                                    TRUE ~ as.character(Year)),
                  stage = factor(stage,
-                                levels = c('2015 to 2019',
-                                           '2020 to 2023',
-                                           '2024', '2025'))) |> 
+                                levels = stage_levels)) |> 
           select(stage, Incidence, Week, Month, Year)
      
      if (!all(is.na(data$Month))){
@@ -67,10 +70,10 @@ plot_compare <- function(i){
      plot_breaks <- pretty(c(0, data$Incidence))
      plot_range <- range(plot_breaks)
      
-     data_stage3_4 <- data |> 
-          filter(stage %in% c('2024', '2025'))
+     data_stage_recent <- data |> 
+          filter(stage %in% as.character(recent_years))
      data_stage_1_2 <- data |> 
-          filter(!stage %in% c('2024', '2025'))
+          filter(!stage %in% as.character(recent_years))
 
      results <- lmer(Incidence ~ stage + (1|xaxis), data = data)
      emm <- emmeans(results, ~ stage)
@@ -81,7 +84,9 @@ plot_compare <- function(i){
           rename('group1' = 'stage1',
                  'group2' = 'stage2') |> 
           filter(group1 == '2015 to 2019') |>
-          mutate(y.position = plot_range[2] * c(0.7, 0.8, 0.9),
+          mutate(y.position = seq(plot_range[2] * 0.65,
+                                  plot_range[2] * 0.95,
+                                  length.out = n()),
                  p.value = ifelse(p.value < 0.001, '***', format(round(p.value, 3), nsmall = 3)))
      
      fig1_1 <- ggplot(data_stage_1_2, aes(x = xaxis, y = Incidence)) +
@@ -95,7 +100,7 @@ plot_compare <- function(i){
                       show.legend = F,
                       linewidth = 1,
                       se = T) +
-          geom_path(data = data_stage3_4, aes(color = stage),
+          geom_path(data = data_stage_recent, aes(color = stage),
                     linewidth = 1) +
           scale_x_continuous(breaks = xaxis_breaks[seq(1, length(xaxis_breaks), by = length(xaxis_breaks) /12)],
                              labels = xaxis_labels[seq(1, length(xaxis_breaks), by = length(xaxis_breaks) /12)],

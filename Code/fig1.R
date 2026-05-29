@@ -27,6 +27,19 @@ DataNews <- read.csv('./Outcome/Table S2.csv') |>
      left_join(read.csv('./Data/iso3.csv'), by = c('country' = 'Country')) |> 
      mutate(issue_date = as.Date(issue_date))
 
+news_start_date <- as.Date('2023-01-01')
+news_end_date <- as.Date('2026-04-30')
+news_month_start <- floor_date(news_end_date, unit = 'month')
+map_breaks <- seq.Date(news_start_date, news_month_start, by = '2 month')
+map_labels <- ifelse(month(map_breaks) == 1,
+                     format(map_breaks, "%b\n%Y"),
+                     format(map_breaks, "%b"))
+minor_start_date <- as.Date('2023-05-01')
+minor_breaks <- seq.Date(minor_start_date, news_month_start, by = '2 month')
+minor_labels <- ifelse(month(minor_breaks) == 1,
+                       format(minor_breaks, "%b\n%Y"),
+                       format(minor_breaks, "%b"))
+
 DataNews |> 
      mutate(year = year(issue_date)) |>
      group_by(year) |>
@@ -49,7 +62,7 @@ DataMapPlot <- DataNews |>
      group_by(ISO3) |>
      summarise(issue_date = min(issue_date),
                .groups = 'drop') |> 
-     mutate(start_issue_date = as.numeric(difftime(issue_date, as.Date('2023-1-1'), units = 'days')),
+     mutate(start_issue_date = as.numeric(difftime(issue_date, news_start_date, units = 'days')),
             yearmonth = format(issue_date, "%Y %m"),
             monthyear = format(issue_date, "%b %Y")) |> 
      arrange(start_issue_date)
@@ -61,8 +74,8 @@ DataNews <- DataNews |>
      arrange(yearmonth) |> 
      ungroup() |>
      # add breaks for each month
-     complete(yearmonth = seq.Date(from = as.Date('2023-01-01'),
-                                   to = as.Date('2025-10-01'),
+     complete(yearmonth = seq.Date(from = news_start_date,
+                                   to = news_month_start,
                                    by = 'month') |> format('%Y %m'),
               fill = list(n = 0)) |>
      arrange(yearmonth) |>
@@ -105,7 +118,7 @@ fig1 <- ggplot(DataNews)+
      geom_col(aes(x = issue_date, y = n),
               fill = fill_color[2],
               color = 'white')+
-     scale_x_date(limits = c(as.Date('2022-12-1'), as.Date('2025-10-31')),
+     scale_x_date(limits = c(news_start_date - months(1), news_end_date),
                   date_labels = "%b %Y",
                   expand = expansion(add = c(0, 0)))+
      scale_y_continuous(expand = expansion(mult = c(0, 0)),
@@ -129,7 +142,7 @@ fig2 <- ggplot(data = DataCountry)+
                    ymin = n_prev,
                    ymax = n),
                fill = fill_color[1]) +
-     scale_x_date(limits = c(as.Date('2022-12-1'), as.Date('2025-10-31')),
+     scale_x_date(limits = c(news_start_date - months(1), news_end_date),
                   date_labels = "%b %Y",
                   expand = expansion(add = c(0, 0)))+
      scale_y_continuous(expand = expansion(mult = c(0, 0)),
@@ -163,11 +176,9 @@ fig3 <- ggplot(data = DataMap) +
                         expand = c(0, 0)) + 
      scale_y_continuous(limits = c(-70, 75)) +
      scale_fill_gradientn(colors = fill_color,
-                          limits = c(0, 1000),
-                          breaks = seq.Date(as.Date('2023-1-1'), as.Date('2025-10-16'), by = '2 month') - as.Date('2023-1-1'),
-                          labels = c('Jan\n2023', 'Mar', 'May', 'Jul', 'Sep', 'Nov',
-                                     'Jan\n2024', 'Mar', 'May', 'Jul', 'Sep', 'Nov',
-                                     'Jan\n2025', 'Mar', 'May', 'Jul', 'Sep'),
+                          limits = c(0, as.numeric(difftime(news_end_date, news_start_date, units = 'days'))),
+                          breaks = map_breaks - news_start_date,
+                          labels = map_labels,
                           na.value = "white")+
      theme_bw() +
      theme(panel.grid = element_blank(),
@@ -200,11 +211,9 @@ fig3_minor <- ggplot(data = DataMap) +
                         expand = c(0, 0)) + 
      scale_y_continuous(limits = c(35, 70)) +
      scale_fill_gradientn(colors = fill_color,
-                          limits = c(0, 900),
-                          breaks = seq.Date(as.Date('2023-5-1'), as.Date('2025-10-16'), by = '2 month') - as.Date('2023-5-1'),
-                          labels = c('May\n2023', 'Jul', 'Sep', 'Nov',
-                                     'Jan\n2024', 'Mar', 'May', 'Jul', 'Sep', 'Nov',
-                                     'Jan\n2025', 'Mar', 'May', 'Jul', 'Sep'),
+                          limits = c(0, as.numeric(difftime(news_end_date, news_start_date, units = 'days'))),
+                          breaks = minor_breaks - news_start_date,
+                          labels = minor_labels,
                           na.value = "white")+
      theme_bw() +
      theme(panel.grid = element_blank(),

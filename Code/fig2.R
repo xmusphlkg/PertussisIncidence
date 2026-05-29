@@ -29,6 +29,9 @@ df_year <- df_clean |>
      mutate(Incidence = Cases / Population)  |> 
      mutate(Date = as.Date(paste0(Year, '-01-01')))
 
+min_year <- min(df_clean$Year, na.rm = TRUE)
+max_year <- max(df_clean$Year, na.rm = TRUE)
+
 # find peak time
 df_clean |> 
      filter(Date >= as.Date('2020-01-01')) |> 
@@ -75,7 +78,7 @@ fig1 <- ggplot(df_count, aes(x = Year, y = Cases, fill = Country)) +
      geom_col(position = 'fill', color = 'white', width = 0.85) +
      scale_fill_manual(values = fill_color,
                        breaks = country_list) +
-     scale_x_continuous(breaks = seq(2015, 2025, 1),
+     scale_x_continuous(breaks = seq(min_year, max_year, 1),
                         expand = expansion(add = c(0.2, 0.2))) +
      scale_y_continuous(labels = scales::percent_format(accuracy = 1),
                         breaks = seq(0, 1, 0.2),

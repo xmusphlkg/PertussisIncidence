@@ -3,16 +3,36 @@
 
 library(tidyverse)
 library(openxlsx)
+library(lubridate)
 
 # data --------------------------------------------------------------------
 
-DataPop <- read.xlsx("./Data/Pertussis incidence.xlsx", sheet = 'Population')
-Countries <- unique(DataPop$Name)
+DataFile <- "./Data/Pertussis incidence.xlsx"
 
-DataInc <- map(Countries,
-               ~read.xlsx(paste0("./Data/Pertussis incidence.xlsx"),
-                          sheet = .x,
-                          detectDates = T))
+DataPop <- read.xlsx(DataFile, sheet = 'Population') |> 
+     mutate(Name = str_trim(Name))
+Countries <- unique(DataPop$Name)
+SheetNames <- getSheetNames(DataFile)
+
+DataInc <- map(Countries, function(country){
+     sheet <- SheetNames[str_trim(SheetNames) == country][1]
+     if (is.na(sheet)) {
+          stop(paste("Cannot find sheet named", country))
+     }
+     
+     read.xlsx(DataFile,
+               sheet = sheet,
+               detectDates = T) |> 
+          mutate(Date = as.Date(Date),
+                 Country = str_trim(Country),
+                 Year = suppressWarnings(as.integer(Year)),
+                 Year = if_else(is.na(Year) & !is.na(Date) & !is.na(Week),
+                                isoyear(Date),
+                                Year),
+                 Year = if_else(is.na(Year) & !is.na(Date),
+                                year(Date),
+                                Year))
+})
 DataInc <- do.call(rbind, DataInc) |> 
      left_join(DataPop, by = c('Country' = 'Name', 'Year' = 'Year')) |> 
      mutate(Incidence = Cases / Population)

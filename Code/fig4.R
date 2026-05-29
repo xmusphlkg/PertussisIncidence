@@ -22,13 +22,24 @@ country_names <- c('US', 'GB',
                    'AU', 'NZ')
 
 DataAge <- lapply(country_names, function(x){
-     read.xlsx('./Data/Pertussis case year age.xlsx', sheet = x) |> 
+     data <- read.xlsx('./Data/Pertussis case year age.xlsx', sheet = x)
+     names(data) <- ifelse(names(data) == 'year', 'Year', names(data))
+     
+     data |> 
           mutate(Country = x) |> 
           pivot_longer(cols = -c(Year, Country), names_to = 'Age', values_to = 'Incidence')
      }) |> 
      bind_rows() |>
-     filter(Age != 'Unknow', !is.na(Incidence)) |> 
+     mutate(Age = str_trim(Age),
+            Age = str_replace_all(Age, "每", "-"),
+            Age = str_replace_all(Age, "[–—]", "-"),
+            Age = str_replace(Age, "^<1$", "0-0")) |> 
+     filter(!Age %in% c('Unknow', 'Unknown', 'Not known', 'Not.known'),
+            !is.na(Incidence)) |> 
      mutate(Incidence = round(Incidence))
+
+min_age_year <- min(DataAge$Year, na.rm = TRUE)
+max_age_year <- max(DataAge$Year, na.rm = TRUE)
 
 TotalCases <- DataAge |>
      group_by(Country, Year) |>
@@ -42,12 +53,11 @@ data_clean <- function(i){
      data <- DataAge |> 
           filter(Country == country_names[i]) |> 
           select(-Country) |> 
-          mutate(StartAge = case_when(grepl("-", Age) ~ as.numeric(sub("-.*", "", Age)),
-                                      grepl("\\+", Age) ~ as.numeric(sub("\\+.*", "", Age)),
-                                      TRUE ~ NA_real_),
-                 EndAge = case_when(grepl("-", Age) ~ as.numeric(sub(".*-", "", Age)),
-                                    grepl("\\+", Age) ~ 100,
-                                    TRUE ~ NA_real_)) |> 
+          mutate(StartAge = as.numeric(str_extract(Age, "^\\d+")),
+                 EndAge = case_when(str_detect(Age, "\\+") ~ 100,
+                                    str_detect(Age, "-") ~ as.numeric(str_extract(Age, "(?<=-)\\d+")),
+                                    TRUE ~ StartAge)) |> 
+          filter(!is.na(StartAge), !is.na(EndAge)) |> 
           rowwise() |> 
           mutate(EndAge = if_else(EndAge == 100, 100, EndAge+0.9),
                  AgeList = if (is.na(StartAge)) list(NA_real_) else list(seq(StartAge, EndAge, 0.1))) |> 
@@ -64,8 +74,9 @@ data_clean <- function(i){
                  )) |> 
           group_by(Year) |> 
           reframe({
-               Age = seq(min(Age), max(Age), by = 0.1)
-               loess_fit = loess(Weight ~ Age, data = cur_data(), span = 0.3)
+               current_data <- pick(Age, Weight)
+               Age = seq(min(current_data$Age), max(current_data$Age), by = 0.1)
+               loess_fit = loess(Weight ~ Age, data = current_data, span = 0.3)
                Density = predict(loess_fit, newdata = data.frame(Age = Age))
                data.frame(Age, Density)
           }) |>  
@@ -77,7 +88,8 @@ data_clean <- function(i){
 
 plot_ridges <- function(i, DataAll){
      data <- DataAll |> 
-          filter(country == country_names[i])
+          filter(country == country_names[i],
+                 Density > 0)
      
      # Filter total cases for the current country
      data_totals <- TotalCases |>
@@ -103,8 +115,8 @@ plot_ridges <- function(i, DataAll){
           scale_x_continuous(limits = c(0, 100),
                              expand = c(0, 0),
                              breaks = seq(0, 100, 10)) +
-          scale_y_continuous(breaks = seq(2015, 2024, 2),
-                             limits = c(2015, NA),
+          scale_y_continuous(breaks = seq(min_age_year, max_age_year, 2),
+                             limits = c(min_age_year, NA),
                              expand = expansion(mult = c(0, 0.04)))+
           scale_fill_gradientn(colours = fill_color[c(1:4, 7:10)],
                                breaks = seq(0, 100, 10),
@@ -126,8 +138,7 @@ plot_ridges <- function(i, DataAll){
                 plot.title.position = 'plot',
                 plot.background = element_blank(),
                 legend.position = if_else(i == 7, 'bottom', 'none'))+
-          guides(fill = guide_colorbar(barwidth = 25,
-                                       vjust = 0))
+          guides(fill = guide_colorbar(barwidth = 25))
      fig
 }
 
@@ -143,7 +154,9 @@ DataYear <- DataAll |>
      group_by(country, Year) |>
      arrange(Age) |>
      mutate(cum_weight = cumsum(Density)) |>
-     summarise(MedianAge = Age[min(which(cum_weight >= sum(Density) / 2))],
+     summarise(MedianAge = if_else(sum(Density, na.rm = TRUE) > 0,
+                                   Age[min(which(cum_weight >= sum(Density) / 2))],
+                                   NA_real_),
                .groups = 'drop')
 
 fig_1 <- ggplot(data = DataYear) +
@@ -154,8 +167,8 @@ fig_1 <- ggplot(data = DataYear) +
      scale_y_continuous(trans = 'log10',
                         breaks = c(1, 5, 10, 20, 40, 60),
                         limits = c(1, 60)) +
-     scale_x_continuous(breaks = seq(2015, 2024, 2),
-                        limits = c(2015, 2024)) +
+     scale_x_continuous(breaks = seq(min_age_year, max_age_year, 2),
+                        limits = c(min_age_year, max_age_year)) +
      theme_bw()+
      theme(panel.grid.major.x = element_blank(),
            plot.background = element_blank(),
