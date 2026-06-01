@@ -18,13 +18,15 @@ scientific_10 <- function(x) {
 df_clean <- read.csv('./Outcome/Table S1.csv') |> 
      group_by(Country) |>
      mutate(Date = as.Date(Date),
-            AnnualizedInci = case_when(all(is.na(Month)) ~ Incidence * 52.14,
-                                       all(!is.na(Month)) ~ Incidence * 12))
+            PlotCases = if_else(is.na(AnalysisCases), Cases, AnalysisCases),
+            PlotIncidence = if_else(is.na(AnalysisIncidence), Incidence, AnalysisIncidence))
 
 df_year <- df_clean |> 
      group_by(Country, Year) |>
-     summarise(Cases = sum(Cases, na.rm = TRUE),
+     summarise(RawIntervalCases = sum(Cases, na.rm = TRUE),
+               Cases = sum(PlotCases, na.rm = TRUE),
                Population = mean(Population, na.rm = TRUE),
+               AnnualCaseSource = paste(unique(AnnualCaseSource), collapse = '; '),
                .groups = 'drop') |> 
      mutate(Incidence = Cases / Population)  |> 
      mutate(Date = as.Date(paste0(Year, '-01-01')))
@@ -37,7 +39,7 @@ df_clean |>
      filter(Date >= as.Date('2020-01-01')) |> 
      group_by(Country) |>
      slice_max(order_by = Cases, n = 1) |> 
-     select(Country, Date, Cases, Incidence) |> 
+     select(Country, Date, Cases, Incidence = PlotIncidence) |> 
      arrange(desc(Date))
 
 # plot ---------------------------------------------------------------------
@@ -67,9 +69,10 @@ country_list <- c('US', 'GB',
 # figure 1 ----------------------------------------------------------------
 
 df_count <- df_clean |> 
-     group_by(Country, Year) |>
-     summarise(Cases = sum(Cases, na.rm = TRUE),
-               .groups = 'drop') |> 
+     ungroup() |>
+     select(Country, Year) |>
+     distinct() |>
+     left_join(df_year |> select(Country, Year, Cases), by = c('Country', 'Year')) |>
      group_by(Year) |>
      mutate(CasesPercent = round(Cases / sum(Cases, na.rm = TRUE), 4))
 
@@ -95,7 +98,7 @@ fig1 <- ggplot(df_count, aes(x = Year, y = Cases, fill = Country)) +
 
 
 split_dates <- c(as.Date(c("2015/1/1", "2020/1/1", "2024/1/1")), max(df_clean$Date))
-split_periods <- c("2015 Jan to 2019 Dec", "2020 Jan to 2023 Dec", "2024 Jan onwards")
+split_periods <- c("2015-2019", "2020-2023", "2024 onward")
 datafile_rect <- data.frame(Period = split_periods,
                             start = split_dates[1:3],
                             end = split_dates[2:4])
@@ -114,7 +117,7 @@ plot_epidemic <- function(i){
      data_year <- df_year |> 
           filter(Country == country_list[i]) |> 
           select(Date, Incidence) |> 
-          mutate(Type = 'Annual incidence')
+          mutate(Type = 'Annual/partial-year incidence')
      data_year <- data_year |> 
           mutate(Date = Date + years(1) - days(1)) |> 
           rbind(data_year) |> 
@@ -124,7 +127,7 @@ plot_epidemic <- function(i){
      data_main <- df_clean |> 
           filter(Country == country_list[i]) |> 
           ungroup() |> 
-          select(Date, Incidence) |> 
+          select(Date, Incidence = PlotIncidence) |> 
           mutate(Type = labs_y)
      
      # ratio for second axis
@@ -137,7 +140,9 @@ plot_epidemic <- function(i){
      data <- data_year |>
           mutate(Incidence = Incidence * ratio) |> 
           rbind(data_main) |> 
-          mutate(Type = factor(Type, levels = c('Weekly incidence', 'Monthly incidence', 'Annual incidence')))
+          mutate(Type = factor(Type, levels = c('Weekly incidence',
+                                                'Monthly incidence',
+                                                'Annual/partial-year incidence')))
      
      plot_breaks <- pretty(c(0, data$Incidence), n=4)
      
@@ -164,7 +169,9 @@ plot_epidemic <- function(i){
           ) +
           scale_fill_manual(values = fill_color[5:7]) +
           scale_color_manual(values = fill_color[3:1],
-                             breaks = c('Annual incidence', 'Monthly incidence', 'Weekly incidence'),
+                             breaks = c('Annual/partial-year incidence',
+                                        'Monthly incidence',
+                                        'Weekly incidence'),
                              drop = FALSE) +
           theme_bw() +
           labs(
@@ -207,6 +214,13 @@ ggsave(filename = './Outcome/Fig 2.pdf',
        height = 9, 
        device = cairo_pdf,
        family = 'Times New Roman')
+
+ggsave(filename = './Outcome/Fig 2.png',
+       plot = fig,
+       width = 16,
+       height = 9,
+       dpi = 300,
+       bg = 'white')
 
 write.xlsx(list(df_clean = df_clean, df_year = df_year),
           './Outcome/fig data/fig 2.xlsx')

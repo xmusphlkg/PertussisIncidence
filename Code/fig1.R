@@ -47,7 +47,7 @@ DataNews |>
                percent = n()/nrow(DataNews) * 100,
                .groups = 'drop')
 
-# Table S3: Distribution of alert news by country
+# Table S3: Distribution of HealthMap alert records by country
 
 DataNews |> 
      group_by(ISO3) |>
@@ -110,6 +110,13 @@ DataCountry |>
      summarise(total_n = max(n),
                .groups = 'drop')
 
+write.xlsx(list(
+     monthly_alert_records = DataNews,
+     country_first_alert = DataMapPlot,
+     cumulative_alerted_countries = DataCountry,
+     healthmap_by_iso3 = read.csv('./Outcome/Table S3.csv')
+), './Outcome/fig data/fig 1.xlsx', overwrite = TRUE)
+
 # fig 1 -----------------------------------------------------------------
 
 fill_color <- c("#BC3C29FF", "#0072B5FF")
@@ -134,7 +141,7 @@ fig1 <- ggplot(DataNews)+
            legend.justification = c(0, 1),
            legend.background = element_blank(),
            plot.title.position = 'plot')+
-     labs(title = "A", x = NULL, y = 'Number of alert news', fill = 'Alert Tag')
+     labs(title = "A", x = NULL, y = 'Number of alert records', fill = 'Alert tag')
 
 fig2 <- ggplot(data = DataCountry)+
      geom_rect(aes(xmin = issue_date - 14,
@@ -158,7 +165,7 @@ fig2 <- ggplot(data = DataCountry)+
            legend.justification = c(0, 1),
            legend.background = element_blank(),
            plot.title.position = 'plot')+
-     labs(title = "B", x = 'Alert issued date', y = 'Cumlative number of alert country', fill = 'Alert Tag')
+     labs(title = "B", x = 'Alert issued date', y = 'Cumulative number of alerted countries', fill = 'Alert tag')
 
 # fig 3 ----------------------------------------------------------------
 
@@ -239,3 +246,10 @@ ggsave(filename = './Outcome/Fig 1.pdf',
        height = 6, 
        device = cairo_pdf,
        family = 'Times New Roman')
+
+ggsave(filename = './Outcome/Fig 1.png',
+       plot = fig_1,
+       width = 13,
+       height = 6,
+       dpi = 300,
+       bg = 'white')

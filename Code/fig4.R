@@ -49,8 +49,8 @@ TotalCases <- DataAge |>
 
 i <- 6
 
-data_clean <- function(i){
-     data <- DataAge |> 
+expand_age_data <- function(i){
+     DataAge |> 
           filter(Country == country_names[i]) |> 
           select(-Country) |> 
           mutate(StartAge = as.numeric(str_extract(Age, "^\\d+")),
@@ -65,25 +65,32 @@ data_clean <- function(i){
           group_by(Year, Age) |> 
           mutate(AverageIncidence = Incidence / n()) |> 
           ungroup() |> 
-          select(Year, Age = AgeList, AverageIncidence) |> 
+          select(Year, AgeGroup = Age, Age = AgeList, AverageIncidence) |> 
           group_by(Year) |> 
           mutate(Weight = AverageIncidence/sum(AverageIncidence),
                  Weight = case_when(
                       is.na(Weight) ~ 0,
                       TRUE ~ Weight
-                 )) |> 
+                 ),
+                 country = country_names[i]) |>
+          ungroup()
+}
+
+smooth_age_data <- function(data){
+     data |>
           group_by(Year) |> 
           reframe({
                current_data <- pick(Age, Weight)
                Age = seq(min(current_data$Age), max(current_data$Age), by = 0.1)
                loess_fit = loess(Weight ~ Age, data = current_data, span = 0.3)
                Density = predict(loess_fit, newdata = data.frame(Age = Age))
+               Density = pmax(Density, 0)
+               if (sum(Density, na.rm = TRUE) > 0) {
+                    Density = Density / sum(Density, na.rm = TRUE)
+               }
                data.frame(Age, Density)
           }) |>  
-          ungroup() |> 
-          mutate(country = country_names[i])
-     
-     return(data)
+          ungroup()
 }
 
 plot_ridges <- function(i, DataAll){
@@ -142,7 +149,12 @@ plot_ridges <- function(i, DataAll){
      fig
 }
 
-DataAll <- bind_rows(map(1:length(country_names), data_clean))
+DataExpanded <- bind_rows(map(1:length(country_names), expand_age_data))
+
+DataAll <- DataExpanded |>
+     group_by(country) |>
+     group_modify(~smooth_age_data(.x)) |>
+     ungroup()
 
 fig_min <- map(1:length(country_names), plot_ridges, DataAll = DataAll)
 
@@ -150,12 +162,12 @@ fig_min <- map(1:length(country_names), plot_ridges, DataAll = DataAll)
 
 fill_color <- paletteer_d("ggsci::default_nejm")
 
-DataYear <- DataAll |> 
+DataYear <- DataExpanded |> 
      group_by(country, Year) |>
      arrange(Age) |>
-     mutate(cum_weight = cumsum(Density)) |>
-     summarise(MedianAge = if_else(sum(Density, na.rm = TRUE) > 0,
-                                   Age[min(which(cum_weight >= sum(Density) / 2))],
+     mutate(cum_weight = cumsum(Weight)) |>
+     summarise(MedianAge = if_else(sum(Weight, na.rm = TRUE) > 0,
+                                   Age[min(which(cum_weight >= sum(Weight) / 2))],
                                    NA_real_),
                .groups = 'drop')
 
@@ -164,9 +176,8 @@ fig_1 <- ggplot(data = DataYear) +
      geom_line(aes(x = Year, y = MedianAge, color = country)) +
      scale_color_manual(values = fill_color,
                         breaks = country_names) +
-     scale_y_continuous(trans = 'log10',
-                        breaks = c(1, 5, 10, 20, 40, 60),
-                        limits = c(1, 60)) +
+     scale_y_continuous(breaks = seq(0, 60, 10),
+                        limits = c(0, 60)) +
      scale_x_continuous(breaks = seq(min_age_year, max_age_year, 2),
                         limits = c(min_age_year, max_age_year)) +
      theme_bw()+
@@ -209,7 +220,18 @@ ggsave("./Outcome/Fig 4.pdf",
        device = cairo_pdf,
        family = "Times New Roman")
 
+ggsave("./Outcome/Fig 4.png",
+       fig,
+       width = 14,
+       height = 7,
+       dpi = 300,
+       bg = "white")
+
 # appendix ----------------------------------------------------------------
 
-write.xlsx(DataYear,
+write.xlsx(list(median_age = DataYear,
+                age_group_input = DataAge,
+                age_grid_weights = DataExpanded,
+                smoothed_density = DataAll,
+                age_known_totals = TotalCases),
            './Outcome/fig data/fig 4.xlsx')

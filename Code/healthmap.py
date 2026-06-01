@@ -13,11 +13,14 @@ def extract_information(html_content):
         raw_date = div.find("span", class_="d").text.strip().rstrip(" -")
         formatted_date = datetime.strptime(raw_date, "%d %b %Y").strftime("%Y-%m-%d")
         
-        news_title = div.find("a", class_="fbox").text.strip()
+        news_anchor = div.find("a", class_="fbox")
+        news_title = news_anchor.text.strip()
+        news_url = news_anchor.get("href")
 
         news_items.append({
             "date": formatted_date,
-            "title": news_title
+            "title": news_title,
+            "url": news_url
         })
     
     return news_items
@@ -28,7 +31,7 @@ params = {
     "category[]": ["1"],
     "diseases[]": "100",
     "sdate": "01/01/2023",
-    "edate": "10/18/2025",
+    "edate": "04/30/2026",
     "heatscore": "1",
     "partner": "hm"
 }
